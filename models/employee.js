@@ -1,33 +1,29 @@
 module.exports = function (sequelize, DataTypes) {
-    const Student = sequelize.define('student', {
+    const Employee = sequelize.define('employee', {
         id: {
             type: DataTypes.INTEGER,
             allowNull: false,
             primaryKey: true,
             autoIncrement: true
         },
-        branch_id: {
-            type: DataTypes.INTEGER,
-            allowNull: false
-        },
         first_name: {
-            type: DataTypes.STRING(45),
+            type: DataTypes.STRING(100),
             allowNull: false
         },
         middle_name: {
-            type: DataTypes.STRING(45),
+            type: DataTypes.STRING(100),
             allowNull: false
         },
         last_name: {
-            type: DataTypes.STRING(45),
+            type: DataTypes.STRING(100),
+            allowNull: false
+        },
+        dob: {
+            type: DataTypes.DATE,
             allowNull: false
         },
         address: {
-            type: DataTypes.TEXT,
-            allowNull: false
-        },
-        gender: {
-            type: DataTypes.ENUM('male','female'),
+            type: DataTypes.STRING,
             allowNull: false
         },
         contact_no: {
@@ -35,24 +31,20 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: true
         },
         image_path: {
-            type: DataTypes.TEXT,
+            type: DataTypes.STRING,
             allowNull: true
         },
-        dob: {
-            type: DataTypes.DATE,
+        gender: {
+            type: DataTypes.ENUM('male','female'),
             allowNull: false
         },
         email: {
-            type: DataTypes.TEXT,
-            allowNull: true
-        },
-        student_no: {
-            type: DataTypes.TEXT,
+            type: DataTypes.STRING,
             allowNull: true
         },
         status: {
             type: DataTypes.ENUM('enabled', 'disabled','archived'),
-            allowNull: true
+            allowNull: false
         },
         users_id: {
             type: DataTypes.INTEGER,
@@ -60,11 +52,11 @@ module.exports = function (sequelize, DataTypes) {
         },
         created_at: {
             type: DataTypes.DATE,
-            allowNull: true
+            allowNull: false
         },
         updated_at: {
             type: DataTypes.DATE,
-            allowNull: true
+            allowNull: false
         }
     }, {
         createdAt: 'created_at',
@@ -72,8 +64,7 @@ module.exports = function (sequelize, DataTypes) {
         freezeTableName: true
     });
 
-    return Student;
-
+    return Employee;
 }
 
 

@@ -15,7 +15,7 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: true
         },
         contact_no: {
-            type: DataTypes.TEXT(10),
+            type: DataTypes.STRING(10),
             allowNull: true
         },
         created_at: {
