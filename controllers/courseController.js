@@ -1,36 +1,101 @@
-
-import courseRepository from '../repositories/courseRepository'
+import courseRepository from "../repositories/courseRepository";
 
 class CourseController {
 
-    async createCourse(req, res) {
-        var course = {};
-        course.name = req.body.name;
-        course.description = req.body.description;
-        course.course_fee = req.body.course_fee;
-        course.status = 'enabled';
+    async saveCourse(req, res) {
+        try {
+            const course = {};
+            course.name = req.body.name;
+            course.description = req.body.description;
+            course.course_fee = req.body.course_fee;
+            course.status = 'enabled';
 
-        res.status(200).send(await courseRepository.create(course));
-    }
-
-    async updateCourse(req, res) {
-        var course = {};
-        var course_id = req.params.id
-
-        course.name = req.body.name;
-        course.description = req.body.description;
-        course.course_fee = req.body.course_fee;
-
-        res.status(200).send(await courseRepository.update(course_id, course));
+            const newCourse = await courseRepository.create(course);
+            res.status(200).send({
+                'success': true,
+                'data': newCourse,
+                'msg': "Successfully Saved"
+            });
+        } catch (e) {
+            res.status(200).send({
+                'success': false,
+                'msg': e.message
+            });
+        }
     }
 
     async getAllCourses(req, res) {
-        res.status(200).send(await courseRepository.getAll());
+        try {
+            let coursees = await courseRepository.findAll();
+            res.status(200).send({
+                'success': true,
+                'data': coursees
+            });
+        } catch (e) {
+            res.status(200).send({
+                'success': false,
+                'msg': e.message
+            });
+        }
     }
 
     async getCourseById(req, res) {
-        var course_id = req.params.id
-        res.status(200).send(await courseRepository.getByID(course_id));
+        try {
+            let courseId = req.params.id;
+            let course = await courseRepository.findById(courseId);
+            res.status(200).send({
+                'success': true,
+                'data': course
+            });
+        } catch (e) {
+            res.status(200).send({
+                'success': false,
+                'msg': e.message
+            });
+        }
+    }
+
+    async updateCourse(req, res) {
+        try {
+            let course = {};
+
+            let courseId = req.params.id;
+            course.name = req.body.name;
+            course.description = req.body.description;
+            course.course_fee = req.body.course_fee;
+
+            let isUpdated = await courseRepository.update(courseId, course)
+
+            if (isUpdated) {
+                res.status(200).send({
+                    'success': true,
+                    'msg': "Successfully Updated"
+                });
+            }
+        } catch (e) {
+            res.status(200).send({
+                'success': false,
+                'msg': e.message
+            });
+        }
+    }
+
+    async deleteCourse(req, res) {
+        try {
+            const courseId = req.params.id
+            let isDeleted = await courseRepository.destroy(courseId)
+            if (isDeleted) {
+                res.status(200).send({
+                    'success': true,
+                    'msg': "Successfully Deleted"
+                });
+            }
+        } catch (e) {
+            res.status(200).send({
+                'success': false,
+                'msg': e.message
+            });
+        }
     }
 
 }

@@ -1,32 +1,46 @@
-const course = require("../models").course;
+const courseModel = require("../models").course;
 
 class CourseRepository {
-  getAll() {
-    return course.findAll();
+
+  create(course){
+    return courseModel.create(course)
   }
 
-  create(data) {
-    return course.create(data);
+  findAll(){
+    return courseModel.findAll()
   }
 
-  getByID(id) {
-    return course.findOne({
-      where: { id: id },
-    });
-  }
-
-  update(id, data) {
-    return course.update(
-      {
-        name : data.name,
-        description : data.description,
-        course_fee : data.course_fee
-      },
-      {
-        where: { id: id }
+  findById(id){
+    return courseModel.findOne({
+      where :{
+        id : id
       }
-    );
+    })
   }
+
+  update(id, course){
+    return courseModel.update(
+        {
+          name: course.name,
+          description: course.address,
+          course_fee: course.contact_no
+        },
+        {
+          where:{
+            id: id
+          }
+        }
+    )
+  }
+
+  destroy(id){
+    return courseModel.destroy({
+      where :{
+        id : id
+      }
+    })
+  }
+  
 }
 
 const courseRepository = new CourseRepository();

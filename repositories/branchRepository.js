@@ -21,9 +21,9 @@ class BranchRepository {
   update(id, branch){
     return branchModel.update(
         {
-          name: branch.first_name,
-          address: branch.middle_name,
-          contact_no: branch.last_name
+          name: branch.name,
+          address: branch.address,
+          contact_no: branch.contact_no
         },
         {
           where:{
