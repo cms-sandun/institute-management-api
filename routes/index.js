@@ -1,8 +1,9 @@
 import courseController from '../controllers/courseController'
 import studentController from '../controllers/studentController'
 import branchController from '../controllers/branchController'
-import express from 'express';
 import employeeController from "../controllers/employeeController";
+import batchController from "../controllers/batchController";
+import express from 'express';
 
 
 const router = express.Router();
@@ -36,6 +37,11 @@ router.put('/api/courses/:id', courseController.updateCourse);
 router.delete('/api/courses/:id', courseController.deleteCourse);
 
 // Batch
+router.post('/api/batches', batchController.saveBatch);
+router.get('/api/batches', batchController.getAllBatches);
+router.get('/api/batches/:id', batchController.getBatchById);
+router.put('/api/batches/:id', batchController.updateBatch);
+router.delete('/api/batches/:id', batchController.deleteBatch);
 
 
 // Class
