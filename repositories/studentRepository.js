@@ -1,24 +1,49 @@
-const studentModel =  require("../models").student;
+const studentModel = require("../models").student;
+const {Op} = require('sequelize')
 
-class StudentRepository{
+class StudentRepository {
 
-    create(student){
+    create(student) {
         return studentModel.create(student)
     }
 
-    findAll(){
+    findAll() {
         return studentModel.findAll()
     }
 
-    findById(id){
+    findById(id) {
         return studentModel.findOne({
-            where :{
-                id : id
+            where: {
+                id: id
             }
         })
     }
 
-    update(id, student){
+    findByName(name) {
+        return studentModel.findAll({
+            where: {
+                [Op.or]: [
+                    {
+                        first_name: {
+                            [Op.like]: `%${name}%`
+                        }
+                    },
+                    {
+                        middle_name: {
+                            [Op.like]: `%${name}%`
+                        }
+                    },
+                    {
+                        last_name: {
+                            [Op.like]: `%${name}%`
+                        }
+                    },
+                ]
+            }
+        })
+    }
+
+    update(id, student) {
         return studentModel.update(
             {
                 first_name: student.first_name,
@@ -31,17 +56,17 @@ class StudentRepository{
                 email: student.email,
             },
             {
-                where:{
+                where: {
                     id: id
                 }
             }
         )
     }
 
-    destroy(id){
+    destroy(id) {
         return studentModel.destroy({
-            where :{
-                id : id
+            where: {
+                id: id
             }
         })
     }

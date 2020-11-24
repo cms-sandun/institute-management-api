@@ -53,6 +53,23 @@ class StudentController {
         }
     }
 
+    async getStudentsByQueryParams(req, res) {
+        try {
+            let nameQuery = req.query.name;
+            console.log(nameQuery)
+            let students = await studentRepository.findByName(nameQuery);
+            res.status(200).send({
+                'success': true,
+                'data': students
+            });
+        } catch (e) {
+            res.status(200).send({
+                'success': false,
+                'msg': e.message
+            });
+        }
+    }
+
     async getStudentById(req, res) {
         try {
             let studentId = req.params.id;

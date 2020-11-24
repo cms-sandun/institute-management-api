@@ -25,6 +25,7 @@ router.delete('/api/branches/:id', branchController.deleteBranch);
 // Student
 router.post('/api/students', studentController.saveStudent);
 router.get('/api/students', studentController.getAllStudents);
+router.get('/api/students/search', studentController.getStudentsByQueryParams);
 router.get('/api/students/:id', studentController.getStudentById);
 router.put('/api/students/:id', studentController.updateStudent);
 router.delete('/api/students/:id', studentController.deleteStudent);
@@ -43,8 +44,8 @@ router.get('/api/batches/:id', batchController.getBatchById);
 router.put('/api/batches/:id', batchController.updateBatch);
 router.delete('/api/batches/:id', batchController.deleteBatch);
 
-
 // Class
+
 
 export default router;
 
