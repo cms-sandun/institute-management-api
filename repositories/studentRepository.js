@@ -8,7 +8,9 @@ class StudentRepository {
     }
 
     findAll() {
-        return studentModel.findAll()
+        return studentModel.findAll({
+            order: [['id','DESC']]
+        })
     }
 
     findById(id) {
