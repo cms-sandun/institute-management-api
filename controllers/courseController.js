@@ -1,4 +1,5 @@
 import courseRepository from "../repositories/courseRepository";
+import studentRepository from "../repositories/studentRepository";
 
 class CourseController {
 
@@ -39,6 +40,23 @@ class CourseController {
         }
     }
 
+    async getCoursesByQueryParams(req, res) {
+        try {
+            let nameQuery = req.query.name;
+            console.log(nameQuery)
+            let students = await courseRepository.findByName(nameQuery);
+            res.status(200).send({
+                'success': true,
+                'data': students
+            });
+        } catch (e) {
+            res.status(200).send({
+                'success': false,
+                'msg': e.message
+            });
+        }
+    }
+
     async getCourseById(req, res) {
         try {
             let courseId = req.params.id;
@@ -63,6 +81,7 @@ class CourseController {
             course.name = req.body.name;
             course.description = req.body.description;
             course.course_fee = req.body.course_fee;
+            course.status = req.body.status;
 
             let isUpdated = await courseRepository.update(courseId, course)
 

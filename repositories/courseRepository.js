@@ -1,3 +1,5 @@
+const {Op} = require('sequelize')
+
 const courseModel = require("../models").course;
 
 class CourseRepository {
@@ -18,12 +20,27 @@ class CourseRepository {
     })
   }
 
+  findByName(name) {
+    return courseModel.findAll({
+      where: {
+        [Op.or]: [
+          {
+            name: {
+              [Op.like]: `%${name}%`
+            }
+          }
+        ]
+      }
+    })
+  }
+
   update(id, course){
     return courseModel.update(
         {
           name: course.name,
-          description: course.address,
-          course_fee: course.contact_no
+          description: course.description,
+          course_fee: course.course_fee,
+          status: course.status
         },
         {
           where:{

@@ -15,10 +15,6 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: false,
             defaultValue: 0,
         },
-        contact_no: {
-            type: DataTypes.STRING(10),
-            allowNull: true
-        },
         course_id: {
             type: DataTypes.INTEGER,
             allowNull: false,

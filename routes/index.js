@@ -33,6 +33,7 @@ router.delete('/api/students/:id', studentController.deleteStudent);
 // Course
 router.post('/api/courses', courseController.saveCourse);
 router.get('/api/courses', courseController.getAllCourses);
+router.get('/api/courses/search', courseController.getCoursesByQueryParams);
 router.get('/api/courses/:id', courseController.getCourseById);
 router.put('/api/courses/:id', courseController.updateCourse);
 router.delete('/api/courses/:id', courseController.deleteCourse);
