@@ -11,6 +11,7 @@ import course from './course';
 import employee from './employee';
 import student from './student';
 import batch from './batch';
+import exam from './exam';
 
 var sequelize = new Sequelize(config.database, config.username,
     config.password, config);
@@ -25,6 +26,7 @@ db.course = course(sequelize, Sequelize);
 db.employee = employee(sequelize, Sequelize);
 db.student = student(sequelize, Sequelize);
 db.batch = batch(sequelize, Sequelize);
+db.exam = exam(sequelize, Sequelize);
 
 Object.keys(db).forEach(modelName => {
     if (db[modelName].associate) {

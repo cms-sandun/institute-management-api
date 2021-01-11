@@ -3,6 +3,7 @@ import studentController from '../controllers/studentController'
 import branchController from '../controllers/branchController'
 import employeeController from "../controllers/employeeController";
 import batchController from "../controllers/batchController";
+import examController from "../controllers/examController";
 import express from 'express';
 
 
@@ -45,7 +46,8 @@ router.get('/api/batches/:id', batchController.getBatchById);
 router.put('/api/batches/:id', batchController.updateBatch);
 router.delete('/api/batches/:id', batchController.deleteBatch);
 
-// Class
+// Exam
+router.get('/api/exams', examController.getAllExames);
 
 
 export default router;
