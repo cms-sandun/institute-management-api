@@ -7,5 +7,14 @@
     "dialect": "mysql",
     "timezone": "+05:30",
     "api" : "http://localhost:5000/api"
+  },
+  "prod": {
+    "username": "institute_mgt_user",
+    "password": "Nw@2225256",
+    "database": "institute_management_db",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "timezone": "+05:30",
+    "api" : "https://api.sandunperera.me/api"
   }
 }
