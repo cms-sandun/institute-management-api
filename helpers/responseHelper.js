@@ -18,6 +18,13 @@ class ResponseHelper{
         });
     }
 
+    sendSuccessResponse(res, data = null){
+        return res.status(httpStatusCode.SUCCESS).send({
+            'success': true,
+            'data': data
+        });
+    }
+
     sendBadRequest(res, msg){
         return res.status(httpStatusCode.BAD_REQUEST).send({
             'success': false,

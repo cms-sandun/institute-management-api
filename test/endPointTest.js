@@ -7,6 +7,7 @@ let faker = require('faker');
 
 let assert = chai.assert;
 let should = chai.should();
+let expect = chai.expect;
 
 chai.use(chaiHttp);
 let app = 'http://localhost:5000';
@@ -55,6 +56,16 @@ describe('App', function () {
                     res.should.have.status(httpStatusCode.UPDATED);
                     assert.equal(res.body.success, true, "success should be true");
 
+                    done();
+                })
+        })
+
+        it('Get all employees', function (done) {
+            chai.request(app)
+                .get(`/api/employees`)
+                .end(function (err, res) {
+                    res.should.have.status(httpStatusCode.SUCCESS);
+                    expect(res.body.data).to.not.be.empty;
                     done();
                 })
         })

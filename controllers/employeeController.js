@@ -36,15 +36,9 @@ class EmployeeController {
     async getAllEmployees(req, res) {
         try {
             let employees = await employeeRepository.findAll();
-            res.status(200).send({
-                'success': true,
-                'data': employees
-            });
+            return responseHelper.sendSuccessResponse(res, employees);
         } catch (e) {
-            res.status(200).send({
-                'success': false,
-                'msg': e.message
-            });
+            return responseHelper.sendBadRequest(res, e.message);
         }
     }
 
