@@ -1,6 +1,6 @@
 const employeeModel =  require("../models").employee;
 
-class StudentRepository{
+class EmployeeRepository{
 
     create(employee){
         return employeeModel.create(employee)
@@ -26,10 +26,13 @@ class StudentRepository{
                 last_name: employee.last_name,
                 dob: employee.dob,
                 address: employee.address,
+                qualifications: employee.qualifications,
                 contact_no: employee.contact_no,
                 image_path: employee.image_path,
                 gender: employee.gender,
                 email: employee.email,
+                type: employee.type,
+                status: employee.status
             },
             {
                 where:{
@@ -49,5 +52,5 @@ class StudentRepository{
 
 }
 
-const studentRepository = new StudentRepository();
-export default studentRepository;
+const employeeRepository = new EmployeeRepository();
+export default employeeRepository;

@@ -1,9 +1,6 @@
 'use strict';
 
-const fs = require('fs');
-const path = require('path');
 const Sequelize = require('sequelize');
-const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname+'/../config/config.json')[env];
 import branch from './branch';
@@ -18,9 +15,6 @@ var sequelize = new Sequelize(config.database, config.username,
 
 const db = {};
 
-db.Sequelize = Sequelize;
-db.sequelize = sequelize;
-
 db.branch = branch(sequelize, Sequelize);
 db.course = course(sequelize, Sequelize);
 db.employee = employee(sequelize, Sequelize);
@@ -34,7 +28,9 @@ Object.keys(db).forEach(modelName => {
     }
 });
 
+sequelize.sync();
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
+
 
 module.exports = db;

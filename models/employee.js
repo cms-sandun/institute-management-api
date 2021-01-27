@@ -18,6 +18,10 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING(100),
             allowNull: false
         },
+        employee_no: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
         dob: {
             type: DataTypes.DATE,
             allowNull: false
@@ -25,6 +29,10 @@ module.exports = function (sequelize, DataTypes) {
         address: {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        qualifications: {
+            type: DataTypes.STRING,
+            allowNull: true
         },
         contact_no: {
             type: DataTypes.STRING(10),
@@ -42,13 +50,21 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: true
         },
+        type: {
+            type: DataTypes.ENUM('academic', 'non-academic'),
+            allowNull: false
+        },
+        branch_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: 'branch',
+                key: 'id'
+            }
+        },
         status: {
             type: DataTypes.ENUM('enabled', 'disabled','archived'),
             allowNull: false
-        },
-        users_id: {
-            type: DataTypes.INTEGER,
-            allowNull: true
         },
         created_at: {
             type: DataTypes.DATE,

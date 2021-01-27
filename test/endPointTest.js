@@ -2,6 +2,8 @@ let chai = require('chai');
 let chaiHttp = require('chai-http');
 let describe = require('mocha').describe;
 let it = require('mocha').it;
+let httpStatusCode = require('../enums/httpStatusCode');
+let faker = require('faker');
 
 let assert = chai.assert;
 let should = chai.should();
@@ -9,55 +11,69 @@ let should = chai.should();
 chai.use(chaiHttp);
 let app = 'http://localhost:5000';
 
-let token = null;
-let applicantId = 15;
 
 describe('App', function () {
 
-    describe('Applicant', function () {
+    describe('Employee Management', function () {
 
-        // it('Check add an applicant', function (done) {
-        //     chai.request(app)
-        //         .post('/api/applicants')
-        //         .send({
-        //             firstName: 'isuru',
-        //             middleName: 'empty',
-        //             lastName: 'madusanka',
-        //             dob: '1995.04.09',
-        //             gender: 'male',
-        //             mobile: '0771234567',
-        //             profileDescription: 'This is a test description',
-        //             imageUrl: 'test image url',
-        //             school: 'test school',
-        //             loginType: 'direct',
-        //             loginId: 'newapp4',
-        //             password: '1234',
-        //         })
-        //         .set('content-type', 'application/json')
-        //         .end(function (err, res) {
-        //             if (err) done(err);
-        //             res.should.have.status(200);
-        //             assert.equal(res.body.success, true);
-        //             done();
-        //         })
-        // });
-
-        it('Check login with wrong details', function (done) {
+        it('Create employee only with required parameters', function (done) {
             chai.request(app)
-                .post('/api/login')
+                .post('/api/employees')
                 .send({
-                    loginId: 'wrongId',
-                    password: 'wrong-password'
+                    firstName: faker.name.firstName(),
+                    middleName: faker.name.middleName(),
+                    lastName: faker.name.lastName(),
+                    dob: '1993-03-06',
+                    address: faker.address.streetAddress(),
+                    contact_no: faker.phone.phoneNumber(),
+                    gender: 'male',
+                    email: faker.internet.email(),
+                    type: 'academic',
+                    branchId: 1
                 })
                 .end(function (err, res) {
-                    if (err) done(err);
-                    res.should.have.status(200);
-                    assert.equal(res.body.success, false);
+                    if(res.should.have.status !== httpStatusCode.CREATED){
+                        console.log(res.body)
+                    }
+                    res.should.have.status(httpStatusCode.CREATED);
+                    assert.equal(res.body.success, true, "success should be true");
+
                     done();
                 })
         });
 
-        it('Check login with correct details', function (done) {
+        it('Update employee with valid data', function (done) {
+            chai.request(app)
+                .put(`/api/employees/${2}`)
+                .send({
+                    firstName: 'Sandun updated',
+                    middleName: 'Madushan updated',
+                    lastName: 'Perera updated'
+                })
+                .end(function (err, res) {
+                    console.log("*************"+JSON.stringify(res))
+                    res.should.have.status(httpStatusCode.UPDATED);
+                    assert.equal(res.body.success, true, "success should be true");
+
+                    done();
+                })
+        })
+
+        /*it('Get employee by id', function (done) {
+            chai.request(app)
+                .get('/api/applicants/1')
+                .end(function (err, res) {
+                    if (err) done(err);
+                    res.should.have.status(200);
+                    assert.equal(res.body.success, true);
+                    assert.notEqual(res.body.data, null);
+                    done();
+                })
+        });*/
+
+
+
+        /*it('Check login with correct details', function (done) {
             chai.request(app)
                 .post('/api/login')
                 .send({
@@ -145,151 +161,8 @@ describe('App', function () {
                     assert.equal(res.body.success, true);
                     done();
                 })
-        });
+        });*/
 
     })
-
-    describe('Project', function () {
-
-        it('Check add a new project', function (done) {
-            chai.request(app)
-                .post(`/api/applicants/projects`)
-                .set('Authorization', `Bearer ${token}`)
-                .send({
-                    applicantId: applicantId,
-                    companyName: 'Test company',
-                    projectName: 'Test project name',
-                    description: 'Test description',
-                    duration: 2,
-                    projectTechnologies: 'react, java',
-                    projectTools: 'Visual studio code'
-                })
-                .end(function (err, res) {
-                    if (err) done(err);
-                    res.should.have.status(201);
-                    assert.equal(res.body.success, true);
-                    done();
-                })
-        })
-
-        it('Check get projects by applicantId', function (done) {
-            chai.request(app)
-                .get(`/api/applicants/${applicantId}/projects`)
-                .end(function (err, res) {
-                    if (err) done(err);
-                    res.should.have.status(200);
-                    assert.equal(res.body.success, true);
-                    done();
-                })
-        });
-
-    })
-
-    describe('Soft skills', function () {
-
-        it('Check add soft skills', function (done) {
-            chai.request(app)
-                .post(`/api/applicants/soft-skills`)
-                .set('Authorization', `Bearer ${token}`)
-                .send({
-                    applicantId: applicantId,
-                    skill: 'Test skill',
-                    rate: 5
-                })
-                .end(function (err, res) {
-                    res.should.have.status(201);
-                    assert.equal(res.body.success, true);
-                    done();
-                });
-        })
-
-    })
-
-    describe('Professional Qualifications', function () {
-
-        it('Check create professional qualification', function (done) {
-            chai.request(app)
-                .post('/api/applicants/professional-qualifications')
-                .set('content-type', 'application/json')
-                .send({
-                    applicantId: applicantId,
-                    instituteName: "Test Institute",
-                    title: 'Test Qualification'
-                })
-                .end(function (err, res) {
-                    if (err) done(err);
-                    res.should.have.status(201);
-                    assert.equal(res.body.success, true);
-                    done();
-                })
-        });
-
-    })
-
-    describe('Educational Qualifications', function () {
-
-        it('Check create educational qualification', function (done) {
-            chai.request(app)
-                .post('/api/applicants/educational-qualifications')
-                .set('content-type', 'application/json')
-                .send({
-                    applicantId: applicantId,
-                    instituteName: 'Test institute',
-                    title: 'Test title',
-                    type: 'degree',
-                    score: 3
-                })
-                .end(function (err, res) {
-                    if (err) done(err);
-                    res.should.have.status(201);
-                    assert.equal(res.body.success, true);
-                    done();
-                })
-        });
-
-    })
-
-    describe('Technical skills', function () {
-
-        it('Check add technical skill', function (done) {
-            chai.request(app)
-                .post('/api/applicants/technical-skills')
-                .send({
-                    applicantId: applicantId,
-                    skill: 'Test skill',
-                    rate: 4
-                })
-                .end(function (err, res) {
-                    if (err) done(err);
-                    res.should.have.status(201);
-                    assert.equal(res.body.success, true);
-                    done();
-                })
-        });
-
-        it('Check get technical skills (technical skills suggestion)', function (done) {
-            chai.request(app)
-                .get('/api/technical-skills?search_text=rea')
-                .end(function (err, res) {
-                    if (err) done(err);
-                    res.should.have.status(200);
-                    assert.equal(res.body.success, true);
-                    done();
-                })
-        });
-
-        it('Check get recently added technical skills', function (done) {
-            chai.request(app)
-                .get('/api/technical-skills/added/recent')
-                .end(function (err, res) {
-                    if (err) done(err);
-                    res.should.have.status(200);
-                    assert.equal(res.body.success, true);
-                    done();
-                })
-        });
-
-    })
-
 
 })
