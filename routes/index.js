@@ -12,6 +12,7 @@ const router = express.Router();
 // Employee
 router.post('/api/employees', employeeController.saveEmployee);
 router.get('/api/employees', employeeController.getAllEmployees);
+router.get('/api/employees/search', employeeController.getEmployeesByQueryParams);
 router.get('/api/employees/:id', employeeController.getEmployeeById);
 router.put('/api/employees/:id', employeeController.updateEmployee);
 router.delete('/api/employees/:id', employeeController.deleteEmployee);

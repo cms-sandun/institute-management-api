@@ -2,6 +2,7 @@ import employeeRepository from '../repositories/employeeRepository';
 import status from '../enums/status';
 import numberHelper from '../helpers/numberHelper';
 import responseHelper from "../helpers/responseHelper";
+import studentRepository from "../repositories/studentRepository";
 
 class EmployeeController {
 
@@ -36,6 +37,17 @@ class EmployeeController {
     async getAllEmployees(req, res) {
         try {
             let employees = await employeeRepository.findAll();
+            return responseHelper.sendSuccessResponse(res, employees);
+        } catch (e) {
+            return responseHelper.sendBadRequest(res, e.message);
+        }
+    }
+
+    async getEmployeesByQueryParams(req, res) {
+        console.log("------------------------------------------------")
+        try {
+            let nameQuery = req.query.name;
+            let employees = await employeeRepository.findByName(nameQuery);
             return responseHelper.sendSuccessResponse(res, employees);
         } catch (e) {
             return responseHelper.sendBadRequest(res, e.message);

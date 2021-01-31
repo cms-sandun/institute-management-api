@@ -1,4 +1,5 @@
 const employeeModel =  require("../models").employee;
+const {Op} = require('sequelize')
 
 class EmployeeRepository{
 
@@ -14,6 +15,30 @@ class EmployeeRepository{
         return employeeModel.findOne({
             where :{
                 id : id
+            }
+        })
+    }
+
+    findByName(name) {
+        return employeeModel.findAll({
+            where: {
+                [Op.or]: [
+                    {
+                        first_name: {
+                            [Op.like]: `%${name}%`
+                        }
+                    },
+                    {
+                        middle_name: {
+                            [Op.like]: `%${name}%`
+                        }
+                    },
+                    {
+                        last_name: {
+                            [Op.like]: `%${name}%`
+                        }
+                    },
+                ]
             }
         })
     }
