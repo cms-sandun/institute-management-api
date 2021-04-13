@@ -1,19 +1,22 @@
-import examRepository from "../repositories/examRepository";
+import userRepository from '../repositories/userRepository';
 
-class ExamController {
+class UserController {
 
-    async saveExam(req, res) {
+    async saveUser(req, res) {
         try {
-            //create object
-            const exam = {};
-            exam.exam_name = req.body.name;
-            exam.start_at = req.body.start_at;
-            exam.end_at = req.body.end_at;
+            let user = {};
+            // Get values from request body
 
-            const newExam = await examRepository.create(exam);
+            user.username = req.body.name;
+            user.password = req.body.password;
+            user.user_type = req.body.user_type;
+            user.user_roles = req.body.user_roles;
+
+            let newStudent = await userRepository.create(user);
+
             res.status(200).send({
                 'success': true,
-                'data': newExam,
+                'data': newStudent,
                 'msg': "Successfully Saved"
             });
         } catch (e) {
@@ -24,13 +27,12 @@ class ExamController {
         }
     }
 
-
-    async getAllExames(req, res) {
+    async getAllUsers(req, res) {
         try {
-            let exames = await examRepository.findAll();
+            let users = await userRepository.findAll();
             res.status(200).send({
                 'success': true,
-                'data': exames
+                'data': users
             });
         } catch (e) {
             res.status(200).send({
@@ -40,13 +42,13 @@ class ExamController {
         }
     }
 
-    async getExamById(req, res) {
+    async getUsersById(req, res) {
         try {
-            let examId = req.params.id;
-            let exam = await examRepository.findById(examId);
+            let userId = req.params.id;
+            let user = await userRepository.findById(userId);
             res.status(200).send({
                 'success': true,
-                'data': exam
+                'data': user
             });
         } catch (e) {
             res.status(200).send({
@@ -56,16 +58,15 @@ class ExamController {
         }
     }
 
-    async updateExam(req, res) {
+        async updateUser(req, res) {
         try {
-            let exam = {};
+            let user = {};
+            let userId = req.params.id;
+            user.username = req.body.name;
+            user.password = req.body.password;
+            user.user_type = req.body.user_type;
 
-            let examId = req.params.id;
-            exam.exam_name = req.body.name;
-            exam.start_at = req.body.start_at;
-            exam.end_at = req.body.end_at;
-
-            let isUpdated = await examRepository.update(examId, exam)
+            let isUpdated = await userRepository.update(userId, user)
 
             if (isUpdated) {
                 res.status(200).send({
@@ -81,10 +82,10 @@ class ExamController {
         }
     }
 
-    async deleteExam(req, res) {
+    async deleteUser(req, res) {
         try {
-            const examId = req.params.id
-            let isDeleted = await examRepository.destroy(examId)
+            const userId = req.params.id
+            let isDeleted = await userRepository.destroy(userId)
             if (isDeleted) {
                 res.status(200).send({
                     'success': true,
@@ -101,5 +102,5 @@ class ExamController {
 
 }
 
-const examController = new ExamController();
-export default examController;
+const userController = new UserController();
+export default userController;

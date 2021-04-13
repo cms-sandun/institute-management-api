@@ -1,19 +1,19 @@
-import examRepository from "../repositories/examRepository";
+import empAttendanceRepository from "../repositories/empAttendanceRepositoy";
+import status from '../enums/status';
 
-class ExamController {
+class EmpAttendanceController {
 
-    async saveExam(req, res) {
+    async saveEmpAttendance(req, res) {
         try {
             //create object
-            const exam = {};
-            exam.exam_name = req.body.name;
-            exam.start_at = req.body.start_at;
-            exam.end_at = req.body.end_at;
+            const empAttendance = {};
+            empAttendance.status = req.body.status;
+            empAttendance.employee_id = req.body.emp_id;
 
-            const newExam = await examRepository.create(exam);
+            const newEmpAttendance = await empAttendanceRepository.create(empAttendance);
             res.status(200).send({
                 'success': true,
-                'data': newExam,
+                'data': newEmpAttendance,
                 'msg': "Successfully Saved"
             });
         } catch (e) {
@@ -25,12 +25,12 @@ class ExamController {
     }
 
 
-    async getAllExames(req, res) {
+    async getAllEmpAttendance(req, res) {
         try {
-            let exames = await examRepository.findAll();
+            let empAttendance = await empAttendanceRepository.findAll();
             res.status(200).send({
                 'success': true,
-                'data': exames
+                'data': empAttendance
             });
         } catch (e) {
             res.status(200).send({
@@ -40,13 +40,13 @@ class ExamController {
         }
     }
 
-    async getExamById(req, res) {
+    async getEmpAttendanceById(req, res) {
         try {
-            let examId = req.params.id;
-            let exam = await examRepository.findById(examId);
+            let empAttendanceId = req.params.id;
+            let empAttendance = await empAttendanceRepository.findById(empAttendanceId);
             res.status(200).send({
                 'success': true,
-                'data': exam
+                'data': empAttendance
             });
         } catch (e) {
             res.status(200).send({
@@ -56,16 +56,14 @@ class ExamController {
         }
     }
 
-    async updateExam(req, res) {
+    async updateEmpAttendance(req, res) {
         try {
-            let exam = {};
+            let empAttendance = {};
 
-            let examId = req.params.id;
-            exam.exam_name = req.body.name;
-            exam.start_at = req.body.start_at;
-            exam.end_at = req.body.end_at;
+            let empAttendanceId = req.params.id;
+            empAttendance.status = req.body.status;
 
-            let isUpdated = await examRepository.update(examId, exam)
+            let isUpdated = await empAttendanceRepository.update(empAttendanceId, empAttendance)
 
             if (isUpdated) {
                 res.status(200).send({
@@ -81,10 +79,10 @@ class ExamController {
         }
     }
 
-    async deleteExam(req, res) {
+    async deleteEmpAttendance(req, res) {
         try {
-            const examId = req.params.id
-            let isDeleted = await examRepository.destroy(examId)
+            const empAttendanceId = req.params.id
+            let isDeleted = await empAttendanceRepository.destroy(empAttendanceId)
             if (isDeleted) {
                 res.status(200).send({
                     'success': true,
@@ -101,5 +99,5 @@ class ExamController {
 
 }
 
-const examController = new ExamController();
-export default examController;
+const empAttendanceController = new EmpAttendanceController();
+export default empAttendanceController;

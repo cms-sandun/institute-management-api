@@ -20,11 +20,7 @@ class ExamRepository {
 
   update(id, exam){
     return examModel.update(
-        {
-          name: exam.name,
-          year: exam.year,
-          course_fee: exam.course_fee
-        },
+       exam,
         {
           where:{
             id: id
@@ -40,7 +36,6 @@ class ExamRepository {
       }
     })
   }
-
 }
 
 const examRepository = new ExamRepository();
