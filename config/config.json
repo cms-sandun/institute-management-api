@@ -1,8 +1,8 @@
 {
   "development": {
-    "username": "root",
-    "password": "Nw@2225256",
-    "database": "institute_management_db",
+    "username": "sandamali",
+    "password": "sandamali",
+    "database": "student-management-api",
     "host": "127.0.0.1",
     "dialect": "mysql",
     "timezone": "+05:30",

@@ -4,6 +4,9 @@ import branchController from '../controllers/branchController'
 import employeeController from "../controllers/employeeController";
 import batchController from "../controllers/batchController";
 import examController from "../controllers/examController";
+import empAttendanceController from "../controllers/empAttendanceController";
+import userController from "../controllers/userController";
+import guardianController from "../controllers/guardianController";
 import express from 'express';
 
 
@@ -48,8 +51,32 @@ router.put('/api/batches/:id', batchController.updateBatch);
 router.delete('/api/batches/:id', batchController.deleteBatch);
 
 // Exam
+router.post('/api/exams', examController.saveExam);
 router.get('/api/exams', examController.getAllExames);
+router.get('/api/exams/:id', examController.getExamById);
+router.put('/api/exams/:id', examController.updateExam);
+router.delete('/api/exams/:id', examController.deleteExam);
 
+// Employee attendance
+router.post('/api/empAttendance', empAttendanceController.saveEmpAttendance);
+router.get('/api/empAttendance', empAttendanceController.getAllEmpAttendance);
+router.get('/api/empAttendance/:id', empAttendanceController.getEmpAttendanceById);
+router.put('/api/empAttendance/:id', empAttendanceController.updateEmpAttendance);
+router.delete('/api/empAttendance/:id', empAttendanceController.deleteEmpAttendance);
+
+// User
+router.post('/api/users', userController.saveUser);
+router.get('/api/users', userController.getAllUsers);
+router.get('/api/users/:id', userController.getUsersById);
+router.put('/api/users/:id', userController.updateUser);
+router.delete('/api/users/:id', userController.deleteUser);
+
+// Guardian
+router.post('/api/guardian', guardianController.saveGuardian);
+router.get('/api/guardian', guardianController.getAllGuardians);
+router.get('/api/guardian/:id', guardianController.getGuardianById);
+router.put('/api/guardian/:id', guardianController.updateGuardian);
+router.delete('/api/guardian/:id', guardianController.deleteGuardian);
 
 export default router;
 

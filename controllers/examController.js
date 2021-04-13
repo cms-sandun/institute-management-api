@@ -4,13 +4,11 @@ class ExamController {
 
     async saveExam(req, res) {
         try {
+            //create object
             const exam = {};
-            exam.name = req.body.name;
-            exam.year = req.body.year;
-            exam.course_fee = req.body.course_fee;
-            exam.course_id = req.body.course_id;
-            exam.branch_id = req.body.branch_id;
-            exam.status = 'enabled';
+            exam.exam_name = req.body.name;
+            exam.start_at = req.body.start_at;
+            exam.end_at = req.body.end_at;
 
             const newExam = await examRepository.create(exam);
             res.status(200).send({
@@ -25,6 +23,7 @@ class ExamController {
             });
         }
     }
+
 
     async getAllExames(req, res) {
         try {
@@ -62,9 +61,9 @@ class ExamController {
             let exam = {};
 
             let examId = req.params.id;
-            exam.name = req.body.name;
-            exam.year = req.body.year;
-            exam.course_fee = req.body.course_fee;
+            exam.exam_name = req.body.name;
+            exam.start_at = req.body.start_at;
+            exam.end_at = req.body.end_at;
 
             let isUpdated = await examRepository.update(examId, exam)
 

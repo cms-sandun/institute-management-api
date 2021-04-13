@@ -1,5 +1,9 @@
 module.exports = {
     ENABLED: 'enabled',
     DISABLED: 'disabled',
-    ARCHIVED: 'archived'
+    ARCHIVED: 'archived',
+
+    PRESENT: 'present',
+    ABSENT: 'absent'
+
 }
