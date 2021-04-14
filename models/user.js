@@ -11,10 +11,18 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: false
         },
         password: {
+            type: DataTypes.TEXT,
+            allowNull: false
+        },
+        user_type: {
+            type: DataTypes.ENUM('admin','teacher','student','parent'),
+            allowNull: false
+        },
+        updated_at: {
             type: DataTypes.DATE,
             allowNull: true
         },
-        updated_at: {
+        created_at: {
             type: DataTypes.DATE,
             allowNull: true
         }

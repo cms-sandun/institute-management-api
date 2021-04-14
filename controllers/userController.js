@@ -8,15 +8,17 @@ class UserController {
             // Get values from request body
 
             user.username = req.body.name;
+            // Need to encrypt the password
             user.password = req.body.password;
             user.user_type = req.body.user_type;
-            user.user_roles = req.body.user_roles;
 
-            let newStudent = await userRepository.create(user);
+            let newUser = await userRepository.create(user);
+
+            // update user id in employee table
 
             res.status(200).send({
                 'success': true,
-                'data': newStudent,
+                'data': newUser,
                 'msg': "Successfully Saved"
             });
         } catch (e) {
