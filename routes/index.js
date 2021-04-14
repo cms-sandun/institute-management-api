@@ -7,13 +7,34 @@ import examController from "../controllers/examController";
 import empAttendanceController from "../controllers/empAttendanceController";
 import userController from "../controllers/userController";
 import guardianController from "../controllers/guardianController";
+var multer  = require('multer')
+
+var storage = multer.diskStorage({
+
+    destination: function (req, file, cb) {
+
+        cb(null, __dirname + '/../uploads/')
+    },
+
+
+    filename: function (req, file, cb) {
+
+        let filename = 'filenametogive';
+        req.body.file = filename
+
+        cb(null, filename)
+    }
+})
+
+var upload = multer({ storage: storage })
+
 import express from 'express';
 
 
 const router = express.Router();
 
 // Employee
-router.post('/api/employees', employeeController.saveEmployee);
+router.post('/api/employees', upload.single('profileImage'), employeeController.saveEmployee);
 router.get('/api/employees', employeeController.getAllEmployees);
 router.get('/api/employees/search', employeeController.getEmployeesByQueryParams);
 router.get('/api/employees/:id', employeeController.getEmployeeById);
