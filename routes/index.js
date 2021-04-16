@@ -79,11 +79,11 @@ router.put('/api/exams/:id', examController.updateExam);
 router.delete('/api/exams/:id', examController.deleteExam);
 
 // Employee attendance
-router.post('/api/empAttendance', empAttendanceController.saveEmpAttendance);
-router.get('/api/empAttendance', empAttendanceController.getAllEmpAttendance);
-router.get('/api/empAttendance/:id', empAttendanceController.getEmpAttendanceById);
-router.put('/api/empAttendance/:id', empAttendanceController.updateEmpAttendance);
-router.delete('/api/empAttendance/:id', empAttendanceController.deleteEmpAttendance);
+router.post('/api/employees/attendance', empAttendanceController.saveEmpAttendance);
+router.get('/api/employees/attendance', empAttendanceController.getAllEmpAttendance);
+router.get('/api/employees/:id/attendance', empAttendanceController.getEmpAttendanceById);
+router.put('/api/employees/attendance/:id', empAttendanceController.updateEmpAttendance);
+router.delete('/api/employees/attendance/:id', empAttendanceController.deleteEmpAttendance);
 
 // User
 router.post('/api/users', userController.saveUser);
@@ -98,6 +98,13 @@ router.get('/api/guardian', guardianController.getAllGuardians);
 router.get('/api/guardian/:id', guardianController.getGuardianById);
 router.put('/api/guardian/:id', guardianController.updateGuardian);
 router.delete('/api/guardian/:id', guardianController.deleteGuardian);
+
+// Student attendance
+router.post('/api/students/attendance', empAttendanceController.saveEmpAttendance);
+router.get('/api/students/attendance', empAttendanceController.getAllEmpAttendance);
+router.get('/api/students/:id/attendance', empAttendanceController.getEmpAttendanceById);
+router.put('/api/students/attendance/:id', empAttendanceController.updateEmpAttendance);
+router.delete('/api/students/attendance/:id', empAttendanceController.deleteEmpAttendance);
 
 export default router;
 
