@@ -10,6 +10,7 @@ import student from './student';
 import batch from './batch';
 import exam from './exam';
 import emp_attendance from './emp_attendance';
+import stu_attendance from './stu_attendance';
 import guardian from './guardian';
 import user from './user';
 
@@ -25,6 +26,7 @@ db.student = student(sequelize, Sequelize);
 db.batch = batch(sequelize, Sequelize);
 db.exam = exam(sequelize, Sequelize);
 db.emp_attendance = emp_attendance(sequelize, Sequelize);
+db.stu_attendance = stu_attendance(sequelize, Sequelize);
 db.guardian = guardian(sequelize, Sequelize);
 db.user = user(sequelize, Sequelize);
 
