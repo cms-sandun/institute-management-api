@@ -109,7 +109,8 @@ router.put('/api/students/attendance/:id', stuAttendanceController.updateStuAtte
 router.delete('/api/students/attendance/:id', stuAttendanceController.deleteStuAttendance);
 
 // Classes
-router.post('/api/students/class', classesController.saveCls);
+router.post('/api/classes', classesController.saveCls);
+router.get('/api/classes', classesController.getAllClss);
 
 export default router;
 
