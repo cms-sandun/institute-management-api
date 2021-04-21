@@ -1,4 +1,4 @@
-import empAttendanceRepository from "../repositories/empAttendanceRepositoy";
+import stuAttendanceRepository from "../repositories/stuAttendanceRepositoy";
 import status from '../enums/status';
 
 class StuAttendanceController {
@@ -8,7 +8,8 @@ class StuAttendanceController {
             //create object
             const stuAttendance = {};
             stuAttendance.status = req.body.status;
-            stuAttendance.employee_id = req.body.stu_id;
+            stuAttendance.stu_id = req.body.stu_id;
+            stuAttendance.classes_id = req.body.classes_id;
 
             const newStuAttendance = await stuAttendanceRepository.create(stuAttendance);
             res.status(200).send({

@@ -5,6 +5,7 @@ import employeeController from "../controllers/employeeController";
 import batchController from "../controllers/batchController";
 import examController from "../controllers/examController";
 import empAttendanceController from "../controllers/empAttendanceController";
+import stuAttendanceController from "../controllers/stuAttendanceController";
 import userController from "../controllers/userController";
 import guardianController from "../controllers/guardianController";
 var multer  = require('multer')
@@ -100,11 +101,11 @@ router.put('/api/guardian/:id', guardianController.updateGuardian);
 router.delete('/api/guardian/:id', guardianController.deleteGuardian);
 
 // Student attendance
-router.post('/api/students/attendance', empAttendanceController.saveEmpAttendance);
-router.get('/api/students/attendance', empAttendanceController.getAllEmpAttendance);
-router.get('/api/students/:id/attendance', empAttendanceController.getEmpAttendanceById);
-router.put('/api/students/attendance/:id', empAttendanceController.updateEmpAttendance);
-router.delete('/api/students/attendance/:id', empAttendanceController.deleteEmpAttendance);
+router.post('/api/students/attendance', stuAttendanceController.saveStuAttendance);
+router.get('/api/students/attendance', stuAttendanceController.getAllStuAttendance);
+router.get('/api/students/:id/attendance', stuAttendanceController.getStuAttendanceById);
+router.put('/api/students/attendance/:id', stuAttendanceController.updateStuAttendance);
+router.delete('/api/students/attendance/:id', stuAttendanceController.deleteStuAttendance);
 
 export default router;
 
