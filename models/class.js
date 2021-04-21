@@ -23,11 +23,11 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: true
         },
         start_at: {
-            type: DataTypes.DATE,
+            type: DataTypes.TIME,
             allowNull: true
         },
         end_at: {
-            type: DataTypes.DATE,
+            type: DataTypes.TIME,
             allowNull: true
         },
         is_repeated: {
