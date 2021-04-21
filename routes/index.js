@@ -8,6 +8,7 @@ import empAttendanceController from "../controllers/empAttendanceController";
 import stuAttendanceController from "../controllers/stuAttendanceController";
 import userController from "../controllers/userController";
 import guardianController from "../controllers/guardianController";
+import classesController from "../controllers/classesController";
 var multer  = require('multer')
 
 var storage = multer.diskStorage({
@@ -106,6 +107,9 @@ router.get('/api/students/attendance', stuAttendanceController.getAllStuAttendan
 router.get('/api/students/:id/attendance', stuAttendanceController.getStuAttendanceById);
 router.put('/api/students/attendance/:id', stuAttendanceController.updateStuAttendance);
 router.delete('/api/students/attendance/:id', stuAttendanceController.deleteStuAttendance);
+
+// Classes
+router.post('/api/students/class', classesController.saveCls);
 
 export default router;
 

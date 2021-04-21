@@ -13,6 +13,7 @@ import emp_attendance from './emp_attendance';
 import stu_attendance from './stu_attendance';
 import guardian from './guardian';
 import user from './user';
+import classes from './class';
 
 var sequelize = new Sequelize(config.database, config.username,
     config.password, config);
@@ -29,6 +30,7 @@ db.emp_attendance = emp_attendance(sequelize, Sequelize);
 db.stu_attendance = stu_attendance(sequelize, Sequelize);
 db.guardian = guardian(sequelize, Sequelize);
 db.user = user(sequelize, Sequelize);
+db.class = classes(sequelize, Sequelize);
 
 Object.keys(db).forEach(modelName => {
     if (db[modelName].associate) {

@@ -1,5 +1,5 @@
 module.exports = function (sequelize, DataTypes) {
-    const Class = sequelize.define('class', {
+    const Class = sequelize.define('classes', {
         id: {
             type: DataTypes.INTEGER,
             allowNull: false,
@@ -9,14 +9,6 @@ module.exports = function (sequelize, DataTypes) {
         name: {
             type: DataTypes.TEXT,
             allowNull: false
-        },
-        branch_id: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                model: 'branch',
-                key: 'id'
-            }
         },
         teacher_id: {
             type: DataTypes.INTEGER,
@@ -28,6 +20,18 @@ module.exports = function (sequelize, DataTypes) {
         },
         day: {
             type: DataTypes.ENUM('monday', 'tuesday','wednesday','thursday','friday','saturday','sunday'),
+            allowNull: true
+        },
+        start_at: {
+            type: DataTypes.DATE,
+            allowNull: true
+        },
+        end_at: {
+            type: DataTypes.DATE,
+            allowNull: true
+        },
+        is_repeated: {
+            type: DataTypes.INTEGER,
             allowNull: true
         },
         status: {
