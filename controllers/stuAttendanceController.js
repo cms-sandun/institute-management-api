@@ -8,7 +8,7 @@ class StuAttendanceController {
             //create object
             const stuAttendance = {};
             stuAttendance.status = req.body.status;
-            stuAttendance.stu_id = req.body.stu_id;
+            stuAttendance.student_id = req.body.student_id;
             stuAttendance.classes_id = req.body.classes_id;
 
             const newStuAttendance = await stuAttendanceRepository.create(stuAttendance);
