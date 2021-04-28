@@ -33,7 +33,7 @@ module.exports = function (sequelize, DataTypes) {
     });
 
     StuAttendance.associate = function (models) {
-        StuAttendance.hasOne(models.student,{foreignKey: "id"});
+        StuAttendance.belongsTo(models.student,{foreignKey: "student_id"});
     }
 
     return StuAttendance;

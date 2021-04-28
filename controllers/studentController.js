@@ -1,4 +1,6 @@
 import studentRepository from '../repositories/studentRepository';
+import emailHelper from "../helpers/emailHelper";
+var QRCode = require('qrcode')
 
 class StudentController {
 
@@ -24,6 +26,23 @@ class StudentController {
             //TODO: upload image and set image path
 
             let newStudent = await studentRepository.create(student);
+            // Create QR code and email to the student
+            console.log("id : ",newStudent.id)
+            QRCode.toFile('images/QRcode.png', newStudent.id.toString(), {
+                color: {
+                    dark: '#000',  // Black dots
+                    light: '#0000' // Transparent background
+                }
+            }, function (err) {
+                if (err) throw err
+
+                const emaildata = {
+                    studentEmail : student.email,
+                    QRImagePath : "http://localhost:5000/images/QRcode.png",
+                    studentName:"Sandun"
+                }
+                emailHelper.sendEmailWithAttachment(emaildata)
+            })
 
             res.status(200).send({
                 'success': true,
