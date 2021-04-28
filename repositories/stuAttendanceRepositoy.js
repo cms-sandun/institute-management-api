@@ -1,55 +1,62 @@
-import  sequelize from 'sequelize'
-const stuAttendanceModel =  require("../models").stu_attendance;
-const student =  require("../models").student;
+import {Op} from 'sequelize'
+import sequelize from 'sequelize'
+
+const stuAttendanceModel = require("../models").stu_attendance;
+const student = require("../models").student;
 
 
-class StuAttendanceRepository{
+class StuAttendanceRepository {
 
-    create(stuAttendance){
+    create(stuAttendance) {
         return stuAttendanceModel.create(stuAttendance)
     }
 
-    findAll(){
+    findAll() {
         return stuAttendanceModel.findAll()
     }
 
-    findById(id){
+    findById(id) {
         return stuAttendanceModel.findOne({
-            where :{
-                id : id
+            where: {
+                id: id
             }
         })
     }
 
-    findByClassIdAndDate(class_id, date){
+    findByClassIdAndDate(class_id, date) {
         return stuAttendanceModel.findAll({
-            where :sequelize.where(sequelize.fn('DATE', sequelize.col('stuAttendance.created_at')), date),
+            where: {
+                [Op.and]: [
+                    {classes_id: class_id},
+                    sequelize.where(sequelize.fn('DATE', sequelize.col('stuAttendance.created_at')), date)
+                ]
+            },
             include: [
                 {
                     model: student,
-                    attributes:["first_name"]
+                    attributes: ["first_name"]
                 }
             ]
         })
     }
 
-    update(id, stuAttendance){
+    update(id, stuAttendance) {
         return stuAttendanceModel.update(
             {
                 status: stuAttendance.status
             },
             {
-                where:{
+                where: {
                     id: id
                 }
             }
         )
     }
 
-    destroy(id){
+    destroy(id) {
         return stuAttendanceModel.destroy({
-            where :{
-                id : id
+            where: {
+                id: id
             }
         })
     }

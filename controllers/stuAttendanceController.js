@@ -132,7 +132,7 @@ class StuAttendanceController {
             const path = await reportHelper.exportPdf("Student_Attendance","studentAttendance",data)
             res.status(200).send({
                 'success': true,
-                'msg': path
+                'data': path
             });
         } catch (e) {
             res.status(200).send({
