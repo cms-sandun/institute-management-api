@@ -32,5 +32,9 @@ module.exports = function (sequelize, DataTypes) {
         freezeTableName: true
     });
 
+    StuAttendance.associate = function (models) {
+        StuAttendance.hasOne(models.student,{foreignKey: "id"});
+    }
+
     return StuAttendance;
 }
