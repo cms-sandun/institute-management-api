@@ -1,4 +1,6 @@
+import  sequelize from 'sequelize'
 const stuAttendanceModel =  require("../models").stu_attendance;
+
 
 class StuAttendanceRepository{
 
@@ -15,6 +17,12 @@ class StuAttendanceRepository{
             where :{
                 id : id
             }
+        })
+    }
+
+    findByClassIdAndDate(class_id, date){
+        return stuAttendanceModel.findAll({
+            where :sequelize.where(sequelize.fn('DATE', sequelize.col('created_at')), date)
         })
     }
 

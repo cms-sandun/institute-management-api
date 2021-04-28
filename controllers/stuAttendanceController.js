@@ -57,6 +57,24 @@ class StuAttendanceController {
         }
     }
 
+    async getStuAttendanceByClassIdAndDate(req, res) {
+        try {
+            let classId = req.query.classes_id;
+            let date = req.query.date;
+
+            let stuAttendance = await stuAttendanceRepository.findByClassIdAndDate(classId, date);
+            res.status(200).send({
+                'success': true,
+                'data': stuAttendance
+            });
+        } catch (e) {
+            res.status(200).send({
+                'success': false,
+                'msg': e.message
+            });
+        }
+    }
+
     async updateStuAttendance(req, res) {
         try {
             let stuAttendance = {};

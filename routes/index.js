@@ -105,8 +105,10 @@ router.delete('/api/guardian/:id', guardianController.deleteGuardian);
 router.post('/api/students/attendance', stuAttendanceController.saveStuAttendance);
 router.get('/api/students/attendance', stuAttendanceController.getAllStuAttendance);
 router.get('/api/students/:id/attendance', stuAttendanceController.getStuAttendanceById);
+router.get('/api/students/attendance/search', stuAttendanceController.getStuAttendanceByClassIdAndDate);
 router.put('/api/students/attendance/:id', stuAttendanceController.updateStuAttendance);
 router.delete('/api/students/attendance/:id', stuAttendanceController.deleteStuAttendance);
+
 
 // Classes
 router.post('/api/classes', classesController.saveCls);
