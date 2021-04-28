@@ -1,6 +1,7 @@
 import stuAttendanceRepository from "../repositories/stuAttendanceRepositoy";
 import status from '../enums/status';
 import reportHelper from "../helpers/reportHelper";
+import classesRepository from "../repositories/classesRepository";
 
 class StuAttendanceController {
 
@@ -122,7 +123,10 @@ class StuAttendanceController {
             let classId = req.query.classes_id;
             let date = req.query.date;
             let stuAttendance = await stuAttendanceRepository.findByClassIdAndDate(classId, date);
+            let classes = await classesRepository.findById(classId);
             const data = {
+                selectedClass : classes.name,
+                selectedDate : date,
                 stuAttendanceData: stuAttendance,
             };
             const path = await reportHelper.exportPdf("Student_Attendance","studentAttendance",data)
