@@ -106,6 +106,7 @@ router.post('/api/students/attendance', stuAttendanceController.saveStuAttendanc
 router.get('/api/students/attendance', stuAttendanceController.getAllStuAttendance);
 router.get('/api/students/:id/attendance', stuAttendanceController.getStuAttendanceById);
 router.get('/api/students/attendance/search', stuAttendanceController.getStuAttendanceByClassIdAndDate);
+router.get('/api/students/attendance/export', stuAttendanceController.exportAttendanceReport);
 router.put('/api/students/attendance/:id', stuAttendanceController.updateStuAttendance);
 router.delete('/api/students/attendance/:id', stuAttendanceController.deleteStuAttendance);
 

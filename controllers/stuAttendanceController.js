@@ -1,5 +1,6 @@
 import stuAttendanceRepository from "../repositories/stuAttendanceRepositoy";
 import status from '../enums/status';
+import reportHelper from "../helpers/reportHelper";
 
 class StuAttendanceController {
 
@@ -108,6 +109,24 @@ class StuAttendanceController {
                     'msg': "Successfully Deleted"
                 });
             }
+        } catch (e) {
+            res.status(200).send({
+                'success': false,
+                'msg': e.message
+            });
+        }
+    }
+
+    async exportAttendanceReport(req, res) {
+        try {
+            let classId = req.query.classes_id;
+            let date = req.query.date;
+            let stuAttendance = await stuAttendanceRepository.findByClassIdAndDate(classId, date);
+            const path = await reportHelper.exportPdf("Student_Attendance","studentAttendance",stuAttendance)
+            res.status(200).send({
+                'success': true,
+                'msg': path
+            });
         } catch (e) {
             res.status(200).send({
                 'success': false,
