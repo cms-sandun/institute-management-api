@@ -13,16 +13,11 @@
     <div class="m-4">
         <div class="m-5 font">
             <div class="row">
-                <div class="col-7">
-                    <img src="https://quant-amount.s3-ap-southeast-2.amazonaws.com/quantamount.PNG"/>
+                <div class="col-4">
+                    <img src="http://localhost:5000/images/logo.jpg" style="max-width: 100px" />
                 </div>
-                <div class="col-5">
-                    <div class="m-2">
-
-                    </div>
-                    <div class="m-2">
-                        {{customerData.company.dataValues.tel_no}}
-                    </div>
+                <div class="col-8">
+                    <h1>Student Attendance</h1>
                 </div>
             </div>
         </div>
@@ -32,32 +27,34 @@
                     <table style="border: 1px solid black;" class="table table-bordered table-sm det">
                         <tbody>
                             <tr>
-                                <td width="20%">Client</td>
+                                <td width="20%">Class</td>
                                 <td></td>
                             </tr>
                             <tr>
-                                <td width="20%">Contact No</td>
+                                <td width="20%">Date</td>
                                 <td></td>
-                            </tr>
-                            <tr>
-                                <td width="20%">Project Name</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td width="20%">Working</td>
-                                <td>Budget</td>
                             </tr>
                         </tbody>
                     </table>
-                </div>
-                <div class="col-4">
-
+                    <table style="border: 1px solid black;" class="table table-bordered table-sm det">
+                        <tbody>
+                        <tr>
+                            <th width="20%">Student Name</th>
+                            <th width="20%">Status</th>
+                            <th width="20%">Note</th>
+                        </tr>
+                        {{#each stuAttendanceData}}
+                        <tr>
+                            <td>{{dataValues.student.dataValues.first_name}}</td>
+                            <td>{{dataValues.status}}</td>
+                        </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-        <div class="font">
-            Builders Margin
-        </div>
         </br>
+    </div>
 </body>
 </html>

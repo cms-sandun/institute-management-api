@@ -29,7 +29,7 @@ class StuAttendanceRepository{
                     model: student,
                     attributes:["first_name"]
                 }
-            ],
+            ]
         })
     }
 

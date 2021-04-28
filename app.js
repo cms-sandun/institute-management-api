@@ -13,7 +13,8 @@ app.use(cors());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('uploads'))
+app.use('/reports',express.static('reports'));
+app.use('/images',express.static('images'));
 app.use(router);
 
 app.listen( PORT, ()=>{

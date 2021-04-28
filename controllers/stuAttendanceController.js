@@ -122,7 +122,10 @@ class StuAttendanceController {
             let classId = req.query.classes_id;
             let date = req.query.date;
             let stuAttendance = await stuAttendanceRepository.findByClassIdAndDate(classId, date);
-            const path = await reportHelper.exportPdf("Student_Attendance","studentAttendance",stuAttendance)
+            const data = {
+                stuAttendanceData: stuAttendance,
+            };
+            const path = await reportHelper.exportPdf("Student_Attendance","studentAttendance",data)
             res.status(200).send({
                 'success': true,
                 'msg': path

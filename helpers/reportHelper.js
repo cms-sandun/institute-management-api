@@ -6,16 +6,18 @@ import path from 'path';
 class ReportHelper {
 
     async exportPdf(reportName, reportTemplate, data) {
-
         try {
+            console.log(data)
             const borwser = await puppeteer.launch({args: ['--no-sandbox']});
             const page = await borwser.newPage();
             const content = await this.compileHbs(reportTemplate, data);
+
 
             await page.setContent(content);
             await page.emulateMediaType('screen');
 
             let fileName = `${reportName}_` + Date.now();
+            let filePath = 'reports/'+fileName+'.pdf';
 
             const pdf = await page.pdf({
                 format: "a4",
@@ -23,9 +25,9 @@ class ReportHelper {
             });
 
 
-            await fs.writeFileSync('reports/'+fileName+'.pdf',pdf,'binary')
+            await fs.writeFileSync(filePath,pdf,'binary')
 
-            return '/reports'+fileName;
+            return ''+filePath;
 
         } catch (error) {
             return error;
