@@ -9,6 +9,13 @@ module.exports = {
             status: 'enabled',
             created_at: '2021-04-30',
             updated_at: '2021-04-30'
+        },{
+            name: 'ICDL',
+            description: 'International Computer Driving Licence',
+            course_fee: 100000.00,
+            status: 'enabled',
+            created_at: '2021-04-29',
+            updated_at: '2021-04-29'
         }])
     },
 

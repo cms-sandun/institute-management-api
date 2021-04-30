@@ -19,29 +19,21 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        branch_id: {
-            type: DataTypes.INTEGER,
-            allowNull: true
-        },
         year: {
             type: DataTypes.INTEGER(4),
             allowNull: false,
         },
-        course_fee: {
-            type: DataTypes.DECIMAL(5,2),
-            allowNull: true
-        },
         status: {
             type: DataTypes.ENUM('enabled', 'disabled'),
-            allowNull: true
+            allowNull: false
         },
         created_at: {
             type: DataTypes.DATE,
-            allowNull: true
+            allowNull: false
         },
         updated_at: {
             type: DataTypes.DATE,
-            allowNull: true
+            allowNull: false
         }
     }, {
         createdAt: 'created_at',
