@@ -15,20 +15,20 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: true
         },
         course_fee: {
-            type: DataTypes.DECIMAL(5,2),
+            type: DataTypes.DECIMAL(10,2),
             allowNull: true
         },
         status: {
             type: DataTypes.ENUM('enabled', 'disabled'),
-            allowNull: true
+            allowNull: false
         },
         created_at: {
             type: DataTypes.DATE,
-            allowNull: true
+            allowNull: false
         },
         updated_at: {
             type: DataTypes.DATE,
-            allowNull: true
+            allowNull: false
         }
     }, {
         createdAt: 'created_at',

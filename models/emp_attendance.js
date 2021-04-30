@@ -1,5 +1,5 @@
 module.exports = function (sequelize, DataTypes) {
-    const EmpAttendance = sequelize.define('empAttendance', {
+    const EmpAttendance = sequelize.define('emp_attendance', {
         id: {
             type: DataTypes.INTEGER,
             allowNull: false,

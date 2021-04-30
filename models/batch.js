@@ -17,19 +17,11 @@ module.exports = function (sequelize, DataTypes) {
         },
         course_id: {
             type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                model: 'course',
-                key: 'id'
-            }
+            allowNull: false
         },
         branch_id: {
             type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                model: 'branch',
-                key: 'id'
-            }
+            allowNull: true
         },
         year: {
             type: DataTypes.INTEGER(4),
