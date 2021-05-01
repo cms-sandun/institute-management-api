@@ -1,4 +1,5 @@
 const examModel = require("../models").exam;
+const batchModel = require("../models").batch;
 
 class ExamRepository {
 
@@ -7,7 +8,14 @@ class ExamRepository {
   }
 
   findAll(){
-    return examModel.findAll()
+    return examModel.findAll({
+      include: [
+        {
+          model: batchModel,
+          attributes: ["name"]
+        }
+      ]
+    })
   }
 
   findById(id){

@@ -40,6 +40,10 @@ module.exports = function (sequelize, DataTypes) {
         freezeTableName: true
     });
 
+    Exam.associate = function (models) {
+        Exam.belongsTo(models.batch, {foreignKey:'batch_id'})
+    }
+
     return Exam;
 
 }
