@@ -6,6 +6,10 @@ module.exports = function (sequelize, DataTypes) {
             primaryKey: true,
             autoIncrement: true
         },
+        batch_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
         exam_name: {
             type: DataTypes.TEXT,
             allowNull: false
