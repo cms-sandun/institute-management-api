@@ -7,6 +7,7 @@ class ExamController {
             //create object
             const exam = {};
             exam.exam_name = req.body.name;
+            exam.batch_id = req.body.name;
             exam.start_at = req.body.start_at;
             exam.end_at = req.body.end_at;
 
@@ -48,31 +49,6 @@ class ExamController {
                 'success': true,
                 'data': exam
             });
-        } catch (e) {
-            res.status(200).send({
-                'success': false,
-                'msg': e.message
-            });
-        }
-    }
-
-    async updateExam(req, res) {
-        try {
-            let exam = {};
-
-            let examId = req.params.id;
-            exam.exam_name = req.body.name;
-            exam.start_at = req.body.start_at;
-            exam.end_at = req.body.end_at;
-
-            let isUpdated = await examRepository.update(examId, exam)
-
-            if (isUpdated) {
-                res.status(200).send({
-                    'success': true,
-                    'msg': "Successfully Updated"
-                });
-            }
         } catch (e) {
             res.status(200).send({
                 'success': false,
