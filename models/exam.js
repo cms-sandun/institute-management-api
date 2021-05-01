@@ -14,13 +14,17 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.TEXT,
             allowNull: false
         },
-        start_at: {
+        exam_date: {
             type: DataTypes.DATE,
-            allowNull: true
+            allowNull: false
         },
-        end_at: {
-            type: DataTypes.DATE,
-            allowNull: true
+        start_time: {
+            type: DataTypes.TIME,
+            allowNull: false
+        },
+        end_time: {
+            type: DataTypes.TIME,
+            allowNull: false
         },
         created_at: {
             type: DataTypes.DATE,

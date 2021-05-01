@@ -6,10 +6,11 @@ class ExamController {
         try {
             //create object
             const exam = {};
+            exam.batch_id = req.body.batch_id;
             exam.exam_name = req.body.name;
-            exam.batch_id = req.body.name;
-            exam.start_at = req.body.start_at;
-            exam.end_at = req.body.end_at;
+            exam.exam_date = req.body.exam_date;
+            exam.start_time = req.body.start_time;
+            exam.end_time = req.body.end_time;
 
             const newExam = await examRepository.create(exam);
             res.status(200).send({
