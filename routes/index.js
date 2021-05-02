@@ -114,6 +114,9 @@ router.delete('/api/students/attendance/:id', stuAttendanceController.deleteStuA
 // Classes
 router.post('/api/classes', classesController.saveCls);
 router.get('/api/classes', classesController.getAllClss);
+router.put('/api/classes/:id', classesController.updateCls);
+router.get('/api/classes/search', classesController.getClssByQueryParams);
+router.delete('/api/classes/:id', classesController.deleteCls);
 
 export default router;
 
