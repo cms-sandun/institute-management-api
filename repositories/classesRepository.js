@@ -38,8 +38,9 @@ class ClassesRepository {
     return classModel.update(
         {
           name: cls.name,
-          description: cls.description,
-          cls_fee: cls.cls_fee,
+          description: cls.day,
+          start_at: cls.start_at,
+          end_at: cls.end_at,
           status: cls.status
         },
         {

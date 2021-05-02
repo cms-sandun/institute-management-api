@@ -80,8 +80,9 @@ class ClassesController {
 
             let classesId = req.params.id;
             classes.name = req.body.name;
-            classes.description = req.body.description;
-            classes.classes_fee = req.body.classes_fee;
+            classes.day = req.body.day;
+            classes.start_at = req.body.start_at;
+            classes.end_at = req.body.end_at;
             classes.status = req.body.status;
 
             let isUpdated = await classesRepository.update(classesId, classes)
