@@ -1,4 +1,6 @@
 const studentModel = require("../models").student;
+const batchModel = require("../models").batch;
+const stuRegistrationModel = require("../models").stu_registration;
 const {Op} = require('sequelize')
 
 class StudentRepository {
@@ -45,6 +47,19 @@ class StudentRepository {
         })
     }
 
+    findByBatchId(batchId){
+        return studentModel.findAll({
+            include: [
+                {
+                    model:  batchModel,
+                    where : {
+                        id:batchId
+                    }
+                }
+            ]
+        })
+    }
+
     update(id, student) {
         return studentModel.update(
             {
@@ -72,6 +87,8 @@ class StudentRepository {
             }
         })
     }
+
+
 
 }
 

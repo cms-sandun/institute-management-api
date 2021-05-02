@@ -72,6 +72,13 @@ module.exports = function (sequelize, DataTypes) {
         freezeTableName: true
     });
 
+    Student.associate = function (models) {
+        Student.belongsToMany(models.batch, {
+            through: 'stu_registration',
+            foreignKey: 'student_id'
+        })
+    }
+
     return Student;
 
 }

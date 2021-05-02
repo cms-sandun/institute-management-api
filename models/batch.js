@@ -1,3 +1,5 @@
+
+
 module.exports = function (sequelize, DataTypes) {
     const Batch = sequelize.define('batch', {
         id: {
@@ -40,6 +42,13 @@ module.exports = function (sequelize, DataTypes) {
         updatedAt: 'updated_at',
         freezeTableName: true
     });
+
+    Batch.associate = function (models) {
+        Batch.belongsToMany(models.student, {
+            through: 'stu_registration',
+            foreignKey: 'batch_id'
+        })
+    }
 
     return Batch;
 

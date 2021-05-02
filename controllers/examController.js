@@ -1,4 +1,6 @@
 import examRepository from "../repositories/examRepository";
+import studentRepository from "../repositories/studentRepository";
+import emailHelper from "../helpers/emailHelper";
 
 class ExamController {
 
@@ -68,6 +70,38 @@ class ExamController {
                     'msg': "Successfully Deleted"
                 });
             }
+        } catch (e) {
+            res.status(200).send({
+                'success': false,
+                'msg': e.message
+            });
+        }
+    }
+
+    async notifyBatch(req, res) {
+        try {
+            const examId = req.body.id
+            const batch_id = req.body.batch_id
+
+            // Get students by batch
+            const students = await studentRepository.findByBatchId(batch_id)
+
+            // Send batch email to notify about exam
+            students.forEach(student => {
+                const emaildata = {
+                    email: student.email,
+                    subject: "New exam is scheduled. Please check the below link",
+                    text: "<a>Click Here</a>"
+                }
+                emailHelper.sendTextEmail(emaildata)
+            })
+
+            res.status(200).send({
+                'success': true,
+                'msg': students
+            });
+
+
         } catch (e) {
             res.status(200).send({
                 'success': false,
