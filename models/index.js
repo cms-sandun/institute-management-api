@@ -15,6 +15,7 @@ import guardian from './guardian';
 import user from './user';
 import classes from './class';
 import stu_registration from './stu_registration';
+import exam_registration from './exam_registration';
 
 var sequelize = new Sequelize(config.database, config.username,
     config.password, config);
@@ -33,6 +34,7 @@ db.guardian = guardian(sequelize, Sequelize);
 db.user = user(sequelize, Sequelize);
 db.class = classes(sequelize, Sequelize);
 db.stu_registration = stu_registration(sequelize, Sequelize);
+db.exam_registration = exam_registration(sequelize, Sequelize);
 
 Object.keys(db).forEach(modelName => {
     if (db[modelName].associate) {
