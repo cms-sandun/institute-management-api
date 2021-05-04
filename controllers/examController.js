@@ -137,9 +137,12 @@ class ExamController {
             // Get students by batch
             const examReg = await examRegRepository.create(obj)
 
+            // Get exam object
+            const exam = await examRepository.findById(exam_id)
+
             res.status(200).send({
                 'success': true,
-                'msg': examReg
+                'data': exam
             });
 
 
