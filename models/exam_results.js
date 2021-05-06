@@ -32,5 +32,9 @@ module.exports = function (sequelize, DataTypes) {
         freezeTableName: true
     });
 
+    ExamResults.associate = function (models) {
+        ExamResults.belongsTo(models.student, {foreignKey:'student_id'})
+    }
+
     return ExamResults;
 }

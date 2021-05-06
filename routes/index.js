@@ -32,6 +32,7 @@ var upload = multer({ storage: storage })
 
 import express from 'express';
 import reportController from "../controllers/reportController";
+import examResultsController from "../controllers/examResultsController";
 
 
 const router = express.Router();
@@ -78,11 +79,13 @@ router.delete('/api/batches/:id', batchController.deleteBatch);
 router.post('/api/exams', examController.saveExam);
 router.post('/api/exams/notify', examController.notifyBatch);
 router.post('/api/exams/results', examController.addExamResult);
+router.get('/api/exams/results', examResultsController.getResultsByExamId);
 router.get('/api/exams', examController.getAllExames);
 router.get('/api/exams/enroll', examController.enrollToExam);
 router.get('/api/exams/:id', examController.getExamById);
 router.delete('/api/exams/:id', examController.deleteExam);
 router.get('/api/exams/export/enrolled_students', examController.exportEnrolledStudentsReport);
+
 
 // Employee attendance
 router.post('/api/employees/attendance', empAttendanceController.saveEmpAttendance);
