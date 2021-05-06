@@ -6,10 +6,6 @@ module.exports = function (sequelize, DataTypes) {
             primaryKey: true,
             autoIncrement: true
         },
-        branch_id: {
-            type: DataTypes.INTEGER,
-            allowNull: false
-        },
         first_name: {
             type: DataTypes.STRING(45),
             allowNull: false

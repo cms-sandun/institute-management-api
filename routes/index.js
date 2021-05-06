@@ -10,19 +10,18 @@ import userController from "../controllers/userController";
 import guardianController from "../controllers/guardianController";
 import classesController from "../controllers/classesController";
 import paymentController from "../controllers/paymentController";
+
+
 var multer  = require('multer')
 
 var storage = multer.diskStorage({
 
     destination: function (req, file, cb) {
-
-        cb(null, __dirname + '/../uploads/')
+        cb(null, __dirname + '/../images/')
     },
 
-
     filename: function (req, file, cb) {
-
-        let filename = 'filenametogive';
+        let filename = file.originalname;
         req.body.file = filename
 
         cb(null, filename)
@@ -54,7 +53,7 @@ router.put('/api/branches/:id', branchController.updateBranch);
 router.delete('/api/branches/:id', branchController.deleteBranch);
 
 // Student
-router.post('/api/students', studentController.saveStudent);
+router.post('/api/students', upload.single('profileImage'), studentController.saveStudent);
 router.get('/api/students', studentController.getAllStudents);
 router.get('/api/students/search', studentController.getStudentsByQueryParams);
 router.get('/api/students/:id', studentController.getStudentById);
