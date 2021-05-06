@@ -31,6 +31,7 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage })
 
 import express from 'express';
+import reportController from "../controllers/reportController";
 
 
 const router = express.Router();
@@ -76,6 +77,7 @@ router.delete('/api/batches/:id', batchController.deleteBatch);
 // Exam
 router.post('/api/exams', examController.saveExam);
 router.post('/api/exams/notify', examController.notifyBatch);
+router.post('/api/exams/results', examController.addExamResult);
 router.get('/api/exams', examController.getAllExames);
 router.get('/api/exams/enroll', examController.enrollToExam);
 router.get('/api/exams/:id', examController.getExamById);
@@ -118,6 +120,9 @@ router.get('/api/classes', classesController.getAllClss);
 router.put('/api/classes/:id', classesController.updateCls);
 router.get('/api/classes/search', classesController.getClssByQueryParams);
 router.delete('/api/classes/:id', classesController.deleteCls);
+
+// Reports
+router.get('/api/reports/result_summary', reportController.getResultSummaryReport);
 
 export default router;
 

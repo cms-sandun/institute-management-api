@@ -12,8 +12,10 @@ class ReportHelper {
             const page = await borwser.newPage();
             const content = await this.compileHbs(reportTemplate, data);
 
+            await page.setContent(content, {
+                waitUntil: ["load","networkidle0"]
+            });
 
-            await page.setContent(content);
             await page.emulateMediaType('screen');
 
             let fileName = `${reportName}_` + Date.now();
@@ -30,6 +32,7 @@ class ReportHelper {
             return ''+filePath;
 
         } catch (error) {
+            console.log(error)
             return error;
         }
     }

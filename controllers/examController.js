@@ -2,6 +2,7 @@ import examRepository from "../repositories/examRepository";
 import studentRepository from "../repositories/studentRepository";
 import emailHelper from "../helpers/emailHelper";
 import examRegRepository from "../repositories/examRegRepository";
+import examResultsRepository from "../repositories/examResultsRepository";
 
 class ExamController {
 
@@ -111,18 +112,12 @@ class ExamController {
         }
     }
 
-    async enrollToExam(req, res){
+    async enrollToExam(req, res) {
         try {
-            console.log("--------------------------------------------")
-
             const stu_id = req.query.stu_id
             const exam_id = req.query.exam_id
 
-            console.log("---------------- stu id",stu_id)
-            console.log("---------------- exam id",exam_id)
-
-
-            if(!stu_id || !exam_id){
+            if (!stu_id || !exam_id) {
                 res.status(200).send({
                     'success': false,
                     'msg': "Error occurred"
@@ -130,8 +125,8 @@ class ExamController {
             }
 
             const obj = {
-                student_id : stu_id,
-                exam_id : exam_id
+                student_id: stu_id,
+                exam_id: exam_id
             }
 
             // Get students by batch
@@ -152,6 +147,44 @@ class ExamController {
                 'msg': e.message
             });
         }
+    }
+
+    async addExamResult(req, res) {
+
+        try {
+            const exam_id = req.body.exam_id
+            const stu_id = req.body.student_id
+            const result = req.body.result
+
+            if (!stu_id || !exam_id || !result) {
+                res.status(200).send({
+                    'success': false,
+                    'msg': "values are missing"
+                });
+            }
+
+            const obj = {
+                exam_id: exam_id,
+                student_id: stu_id,
+                result: result
+            }
+
+
+
+            const examResult = await examResultsRepository.create(obj)
+
+            res.status(200).send({
+                'success': true,
+                'data': examResult
+            });
+
+        } catch (e) {
+            res.status(200).send({
+                'success': false,
+                'msg': e.message
+            });
+        }
+
     }
 
 }
