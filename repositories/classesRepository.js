@@ -38,7 +38,7 @@ class ClassesRepository {
     return classModel.update(
         {
           name: cls.name,
-          description: cls.day,
+          day: cls.day,
           start_at: cls.start_at,
           end_at: cls.end_at,
           status: cls.status

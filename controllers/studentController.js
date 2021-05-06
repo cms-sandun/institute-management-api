@@ -39,7 +39,7 @@ class StudentController {
                 const emaildata = {
                     studentEmail : student.email,
                     QRImagePath : "http://localhost:5000/images/QRcode.png",
-                    studentName:"Sandun"
+                    studentName:student.name
                 }
                 emailHelper.sendEmailWithAttachment(emaildata)
             })

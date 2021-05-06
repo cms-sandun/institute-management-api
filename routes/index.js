@@ -9,6 +9,7 @@ import stuAttendanceController from "../controllers/stuAttendanceController";
 import userController from "../controllers/userController";
 import guardianController from "../controllers/guardianController";
 import classesController from "../controllers/classesController";
+import paymentController from "../controllers/paymentController";
 var multer  = require('multer')
 
 var storage = multer.diskStorage({
@@ -127,6 +128,12 @@ router.delete('/api/classes/:id', classesController.deleteCls);
 
 // Reports
 router.get('/api/reports/result_summary', reportController.getResultSummaryReport);
+
+// Payments
+router.post('/api/payments', paymentController.savePayment);
+router.get('/api/payments', paymentController.getAllPayments);
+router.put('/api/payments/:id', paymentController.updatePayment);
+router.delete('/api/payments/:id', paymentController.deletePayment);
 
 export default router;
 
