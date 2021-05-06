@@ -83,11 +83,12 @@ class ExamController {
 
     async notifyBatch(req, res) {
         try {
-            const examId = req.body.id
-            const batch_id = req.body.batch_id
+            console.log("------------------")
+            const exam_id = req.body.exam_id
+            const exam = await examRepository.findById(exam_id)
 
             // Get students by batch
-            const students = await studentRepository.findByBatchId(batch_id)
+            const students = await studentRepository.findByBatchId(exam.batch_id)
 
             // Send batch email to notify about exam
             students.forEach(student => {
@@ -101,7 +102,7 @@ class ExamController {
 
             res.status(200).send({
                 'success': true,
-                'msg': students
+                'msg': "Successfully notified " + students.length + " students."
             });
 
 
@@ -213,7 +214,7 @@ class ExamController {
             const path = await reportHelper.exportPdf("Enrolled_Results","enrolledStudents",data)
             res.status(200).send({
                 'success': true,
-                'data': enrolledStudents
+                'data': path
             });
 
         } catch (e) {
