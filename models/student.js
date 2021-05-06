@@ -77,6 +77,10 @@ module.exports = function (sequelize, DataTypes) {
             through: 'stu_registration',
             foreignKey: 'student_id'
         })
+        Student.belongsToMany(models.exam, {
+            through: 'exam_registration',
+            foreignKey: 'student_id'
+        })
     }
 
     return Student;

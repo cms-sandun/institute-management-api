@@ -3,6 +3,7 @@ import studentRepository from "../repositories/studentRepository";
 import emailHelper from "../helpers/emailHelper";
 import examRegRepository from "../repositories/examRegRepository";
 import examResultsRepository from "../repositories/examResultsRepository";
+import reportHelper from "../helpers/reportHelper";
 
 class ExamController {
 
@@ -176,6 +177,43 @@ class ExamController {
             res.status(200).send({
                 'success': true,
                 'data': examResult
+            });
+
+        } catch (e) {
+            res.status(200).send({
+                'success': false,
+                'msg': e.message
+            });
+        }
+
+    }
+
+    async exportEnrolledStudentsReport(req, res) {
+
+        try {
+            const exam_id = req.query.exam_id
+
+            if (!exam_id) {
+                res.status(200).send({
+                    'success': false,
+                    'msg': "values are missing"
+                });
+            }
+
+            var enrolledStudents = await examRepository.findStudentsByExamId(exam_id)
+            const exam = await examRepository.findById(exam_id)
+            var students = enrolledStudents[0].dataValues.students
+
+            const data = {
+                examName: exam.exam_name,
+                examDate: exam.exam_date,
+                enrolledStudents: students
+            }
+
+            const path = await reportHelper.exportPdf("Enrolled_Results","enrolledStudents",data)
+            res.status(200).send({
+                'success': true,
+                'data': enrolledStudents
             });
 
         } catch (e) {

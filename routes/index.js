@@ -82,6 +82,7 @@ router.get('/api/exams', examController.getAllExames);
 router.get('/api/exams/enroll', examController.enrollToExam);
 router.get('/api/exams/:id', examController.getExamById);
 router.delete('/api/exams/:id', examController.deleteExam);
+router.get('/api/exams/export/enrolled_students', examController.exportEnrolledStudentsReport);
 
 // Employee attendance
 router.post('/api/employees/attendance', empAttendanceController.saveEmpAttendance);

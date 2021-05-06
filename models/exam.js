@@ -42,6 +42,10 @@ module.exports = function (sequelize, DataTypes) {
 
     Exam.associate = function (models) {
         Exam.belongsTo(models.batch, {foreignKey:'batch_id'})
+        Exam.belongsToMany(models.student, {
+            through: 'exam_registration',
+            foreignKey: 'exam_id'
+        })
     }
 
     return Exam;
