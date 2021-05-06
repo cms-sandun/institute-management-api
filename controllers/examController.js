@@ -4,6 +4,7 @@ import emailHelper from "../helpers/emailHelper";
 import examRegRepository from "../repositories/examRegRepository";
 import examResultsRepository from "../repositories/examResultsRepository";
 import reportHelper from "../helpers/reportHelper";
+import moment from "moment";
 
 class ExamController {
 
@@ -207,7 +208,7 @@ class ExamController {
 
             const data = {
                 examName: exam.exam_name,
-                examDate: exam.exam_date,
+                examDate: moment(exam.exam_date).format('YYYY-MM-DD'),
                 enrolledStudents: students
             }
 
