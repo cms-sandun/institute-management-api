@@ -1,4 +1,5 @@
 const batchModel = require("../models").batch;
+const studentModel = require("../models").student;
 
 class BatchRepository {
 
@@ -38,6 +39,16 @@ class BatchRepository {
       where :{
         id : id
       }
+    })
+  }
+
+  findStudentsByBatchId(batch_id) {
+    return batchModel.findAll({
+      include:
+          {
+            model: studentModel,
+            through: {where: {batch_id: batch_id}}
+          }
     })
   }
 

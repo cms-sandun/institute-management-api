@@ -70,6 +70,8 @@ router.delete('/api/courses/:id', courseController.deleteCourse);
 
 // Batch
 router.post('/api/batches', batchController.saveBatch);
+router.post('/api/batches/associate_students', batchController.addAssociateStudent);
+router.get('/api/batches/associate_students', batchController.getAssociateStudents);
 router.get('/api/batches', batchController.getAllBatches);
 router.get('/api/batches/:id', batchController.getBatchById);
 router.put('/api/batches/:id', batchController.updateBatch);

@@ -1,4 +1,5 @@
 import batchRepository from "../repositories/batchRepository";
+import studentRegRepository from "../repositories/studentRegRepository";
 
 class BatchController {
 
@@ -90,6 +91,72 @@ class BatchController {
                 res.status(200).send({
                     'success': true,
                     'msg': "Successfully Deleted"
+                });
+            }
+        } catch (e) {
+            res.status(200).send({
+                'success': false,
+                'msg': e.message
+            });
+        }
+    }
+
+    async addAssociateStudent(req, res) {
+        try {
+            const batchId = req.body.batch_id
+            const student_id = req.body.student_id
+
+            const payload = {
+                batch_id : batchId,
+                student_id : student_id
+            }
+
+            let register = await studentRegRepository.create(payload)
+
+            if (register) {
+                res.status(200).send({
+                    'success': true,
+                    'msg': "Successfully Added"
+                });
+            }
+        } catch (e) {
+            res.status(200).send({
+                'success': false,
+                'msg': e.message
+            });
+        }
+    }
+
+    async getAssociateStudents(req, res) {
+        try {
+            const batchId = req.query.batch_id
+            let registeredStudents = await batchRepository.findStudentsByBatchId(batchId)
+            var students = registeredStudents[0].dataValues.students
+
+            if (students) {
+                res.status(200).send({
+                    'success': true,
+                    'data': students
+                });
+            }
+        } catch (e) {
+            res.status(200).send({
+                'success': false,
+                'msg': e.message
+            });
+        }
+    }
+
+    async deleteAssociateStudents(req, res) {
+        try {
+            const batchId = req.query.batch_id
+            let registeredStudents = await batchRepository.findStudentsByBatchId(batchId)
+            var students = registeredStudents[0].dataValues.students
+
+            if (students) {
+                res.status(200).send({
+                    'success': true,
+                    'data': students
                 });
             }
         } catch (e) {
