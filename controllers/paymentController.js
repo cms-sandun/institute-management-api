@@ -12,10 +12,10 @@ class PaymentController {
             payment.student_id = req.body.studentID;
             payment.paid_amount = req.body.paidAmount;
             payment.remaining_amount = req.body.remainingAmount;
-            const paymentDate = moment(req.body.date.format('YYYY-MM-DD'))
+            const paymentDate = moment(req.body.date).format('YYYY-MM-DD')
             payment.date = paymentDate;
             payment.payment_method = req.body.paymentMethod;
-
+            console.log("----------------",payment)
             const newPayment = await paymentRepository.create(payment);
             res.status(200).send({
                 'success': true,

@@ -16,7 +16,7 @@ module.exports = function (sequelize, DataTypes) {
         },
         course_fee: {
             type: DataTypes.DECIMAL(10,2),
-            allowNull: true
+            allowNull: false
         },
         status: {
             type: DataTypes.ENUM('enabled', 'disabled'),

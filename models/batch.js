@@ -1,5 +1,4 @@
 
-
 module.exports = function (sequelize, DataTypes) {
     const Batch = sequelize.define('batch', {
         id: {
@@ -21,9 +20,9 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        year: {
-            type: DataTypes.INTEGER(4),
-            allowNull: false,
+        description: {
+            type: DataTypes.TEXT,
+            allowNull: true
         },
         status: {
             type: DataTypes.ENUM('enabled', 'disabled'),

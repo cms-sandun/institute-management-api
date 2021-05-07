@@ -6,10 +6,8 @@ class BatchController {
         try {
             const batch = {};
             batch.name = req.body.name;
-            batch.year = req.body.year;
-            batch.course_fee = req.body.course_fee;
+            batch.description = req.body.description;
             batch.course_id = req.body.course_id;
-            batch.branch_id = req.body.branch_id;
             batch.status = 'enabled';
 
             const newBatch = await batchRepository.create(batch);
@@ -64,7 +62,9 @@ class BatchController {
             let batchId = req.params.id;
             batch.name = req.body.name;
             batch.year = req.body.year;
-            batch.course_fee = req.body.course_fee;
+            batch.description = req.body.description;
+            batch.course_id = req.body.course_id;
+            batch.status = 'enabled';
 
             let isUpdated = await batchRepository.update(batchId, batch)
 

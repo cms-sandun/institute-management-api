@@ -10,7 +10,6 @@ class CourseController {
             course.description = req.body.description;
             course.course_fee = req.body.course_fee;
             course.status = 'enabled';
-
             const newCourse = await courseRepository.create(course);
             res.status(200).send({
                 'success': true,

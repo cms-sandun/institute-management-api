@@ -1,11 +1,13 @@
 import {Op} from 'sequelize'
 import sequelize from 'sequelize'
 
+
 const stuAttendanceModel = require("../models").stu_attendance;
 const student = require("../models").student;
 
 
 class StuAttendanceRepository {
+
 
     create(stuAttendance) {
         return stuAttendanceModel.create(stuAttendance)
