@@ -77,6 +77,7 @@ router.delete('/api/batches/:id', batchController.deleteBatch);
 
 // Exam
 router.post('/api/exams', examController.saveExam);
+router.get('/api/exams/enrolled_students', examController.exportEnrolledStudentsList);
 router.post('/api/exams/notify', examController.notifyBatch);
 router.post('/api/exams/results', examController.addExamResult);
 router.get('/api/exams/results', examResultsController.getResultsByExamId);

@@ -20,11 +20,9 @@ class StudentController {
             student.dob = req.body.dob;
             student.email = req.body.email;
             student.status = 'disabled';
-            student.image_path = req.file.filename
+            //student.image_path = req.file.filename
             // Generate student ID
             student.studentNo = Math.floor(1000 + Math.random() * 9000);
-
-
 
             let newStudent = await studentRepository.create(student);
             // Create QR code and email to the student
