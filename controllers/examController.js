@@ -172,6 +172,7 @@ class ExamController {
                     'success': false,
                     'msg': "values are missing"
                 });
+                return
             }
 
             const obj = {
@@ -179,8 +180,6 @@ class ExamController {
                 student_id: stu_id,
                 result: result
             }
-
-
 
             const examResult = await examResultsRepository.create(obj)
 
