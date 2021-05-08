@@ -33,6 +33,7 @@ var upload = multer({ storage: storage })
 import express from 'express';
 import reportController from "../controllers/reportController";
 import examResultsController from "../controllers/examResultsController";
+import eventsController from "../controllers/eventsController";
 
 
 const router = express.Router();
@@ -136,6 +137,9 @@ router.post('/api/payments', paymentController.savePayment);
 router.get('/api/payments', paymentController.getAllPayments);
 router.put('/api/payments/:id', paymentController.updatePayment);
 router.delete('/api/payments/:id', paymentController.deletePayment);
+
+// Events
+router.get('/api/events', eventsController.getAllEvents);
 
 export default router;
 

@@ -5,6 +5,7 @@ import examRegRepository from "../repositories/examRegRepository";
 import examResultsRepository from "../repositories/examResultsRepository";
 import reportHelper from "../helpers/reportHelper";
 import moment from "moment";
+import eventRepository from "../repositories/eventRepository";
 
 class ExamController {
 
@@ -14,11 +15,20 @@ class ExamController {
             const exam = {};
             exam.batch_id = req.body.batch_id;
             exam.exam_name = req.body.name;
-            exam.exam_date = req.body.exam_date;
+            exam.exam_date = moment(req.body.exam_date).format("YYYY-MM-DD");
             exam.start_time = req.body.start_time;
             exam.end_time = req.body.end_time;
 
             const newExam = await examRepository.create(exam);
+            // Add calendar event
+            const calendarEvent = {
+                title: exam.exam_name,
+                allDay: 0,
+                start: `${exam.exam_date} ${exam.start_time}`,
+                end: `${exam.exam_date} ${exam.end_time}`
+            }
+            const event = await eventRepository.create(calendarEvent)
+
             res.status(200).send({
                 'success': true,
                 'data': newExam,
@@ -219,7 +229,7 @@ class ExamController {
                 enrolledStudents: students
             }
 
-            const path = await reportHelper.exportPdf("Enrolled_Results","enrolledStudents",data)
+            const path = await reportHelper.exportPdf("Enrolled_Results", "enrolledStudents", data)
             res.status(200).send({
                 'success': true,
                 'data': path

@@ -18,6 +18,7 @@ import stu_registration from './stu_registration';
 import exam_registration from './exam_registration';
 import exam_results from './exam_results';
 import payment from './payment';
+import events from './events';
 
 var sequelize = new Sequelize(config.database, config.username,
     config.password, config);
@@ -39,6 +40,7 @@ db.stu_registration = stu_registration(sequelize, Sequelize);
 db.exam_registration = exam_registration(sequelize, Sequelize);
 db.exam_results = exam_results(sequelize, Sequelize);
 db.payment = payment(sequelize, Sequelize);
+db.events = events(sequelize, Sequelize);
 
 Object.keys(db).forEach(modelName => {
     if (db[modelName].associate) {
