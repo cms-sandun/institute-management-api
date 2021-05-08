@@ -1,7 +1,7 @@
 {
   "development": {
-    "username": "root",
-    "password": "Nw@2225256",
+    "username": "sandamali",
+    "password": "sandamali",
     "database": "institute_management_db",
     "host": "127.0.0.1",
     "dialect": "mysql",
