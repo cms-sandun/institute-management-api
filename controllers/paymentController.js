@@ -7,9 +7,10 @@ class PaymentController {
     async savePayment(req, res) {
         try {
 
+            console.log("------- req body",req.body)
             //create object
             const payment = {};
-            payment.student_id = req.body.studentID;
+            payment.student_id = req.body.studentId;
             payment.paid_amount = req.body.paidAmount;
             payment.remaining_amount = req.body.remainingAmount;
             const paymentDate = moment(req.body.date).format('YYYY-MM-DD')
