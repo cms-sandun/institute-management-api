@@ -19,7 +19,7 @@ class EmailHelper{
             from: '"SipZone Education Institute"<sandunpvt@gmail.com>',
             to: emaildata.email,
             subject: emaildata.subject,
-            text: emaildata.text,
+            html: emaildata.text,
         };
 
         transporter.sendMail(mailOptions, function (error, info){

@@ -84,7 +84,6 @@ class ExamController {
 
     async notifyBatch(req, res) {
         try {
-            console.log("------------------")
             const exam_id = req.body.exam_id
             const exam = await examRepository.findById(exam_id)
 
@@ -96,7 +95,16 @@ class ExamController {
                 const emaildata = {
                     email: student.email,
                     subject: "New exam is scheduled. Please check the below link",
-                    text: "<a>Click Here</a>"
+                    text: `
+                                <p>Hello ${student.first_name}</p>
+                                <p>New exam has been published.</p>
+                                <h5>Exam details</h5>
+                                <p>Exam : ${exam.exam_name}</p>
+                                <p>Exam Date : ${exam.exam_date}</p>
+                                <p>Exam Time : ${exam.start_time} - ${exam.end_time}</p>
+                                <h5>Please click the below link for enrollment</h5>
+                                <a href="http://localhost:3000/exams/enroll?stu_id=${student.id}&exam_id=${exam_id}">Enroll Now</a>
+                            `
                 }
                 emailHelper.sendTextEmail(emaildata)
             })
