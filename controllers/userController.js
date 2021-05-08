@@ -2,6 +2,28 @@ import userRepository from '../repositories/userRepository';
 
 class UserController {
 
+    async login(req, res) {
+        try {
+            let userName = req.body.user_name
+            let pwd = req.body.pwd
+
+            const user = await userRepository.findByUserNameAndPwd(userName, pwd)
+
+            if(user){
+                res.status(200).send({
+                    'success': true,
+                    'data': user
+                });
+            }
+
+        } catch (e) {
+            res.status(200).send({
+                'success': false,
+                'msg': e.message
+            });
+        }
+    }
+
     async saveUser(req, res) {
         try {
             let user = {};

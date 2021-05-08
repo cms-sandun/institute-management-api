@@ -54,14 +54,6 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.ENUM('academic', 'non-academic'),
             allowNull: false
         },
-        branch_id: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                model: 'branch',
-                key: 'id'
-            }
-        },
         status: {
             type: DataTypes.ENUM('enabled', 'disabled','archived'),
             allowNull: false

@@ -101,6 +101,7 @@ router.delete('/api/employees/attendance/:id', empAttendanceController.deleteEmp
 // User
 router.post('/api/users', userController.saveUser);
 router.get('/api/users', userController.getAllUsers);
+router.post('/api/users/login', userController.login);
 router.get('/api/users/:id', userController.getUsersById);
 router.put('/api/users/:id', userController.updateUser);
 router.delete('/api/users/:id', userController.deleteUser);

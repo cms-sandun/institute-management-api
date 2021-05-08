@@ -24,11 +24,7 @@ class EmployeeController {
             employee.dob= req.body.dob;
             employee.qualifications= req.body.qualifications;
             employee.type= req.body.type;
-            employee.branch_id= req.body.branchId;
             employee.status = status.ENABLED;
-
-            console.log(req.profileImage)
-            console.log(req.body)
 
             // Upload profile image
             // fs.writeFileSync(__dirname + '/../uploads/'+Date.now()+'.jpg', req.file,  function(err){
@@ -54,7 +50,6 @@ class EmployeeController {
     }
 
     async getEmployeesByQueryParams(req, res) {
-        console.log("------------------------------------------------")
         try {
             let nameQuery = req.query.name;
             let employees = await employeeRepository.findByName(nameQuery);

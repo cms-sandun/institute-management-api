@@ -21,6 +21,15 @@ class UserRepository {
         })
     }
 
+    findByUserNameAndPwd(userName, pwd){
+        return userModel.findOne({
+            where: {
+                username : userName,
+                password: pwd
+            }
+        })
+    }
+
 
     update(id, user) {
         return userModel.update(
