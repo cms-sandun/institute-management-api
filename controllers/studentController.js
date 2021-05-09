@@ -1,6 +1,7 @@
 import studentRepository from '../repositories/studentRepository';
 import emailHelper from "../helpers/emailHelper";
 import imageUploadHelper from "../helpers/imageUploadHelper";
+import userRepository from "../repositories/userRepository";
 var QRCode = require('qrcode')
 var fs = require('fs');
 
@@ -19,14 +20,13 @@ class StudentController {
             student.contact_no = req.body.contactNo;
             student.dob = req.body.dob;
             student.email = req.body.email;
-            student.status = 'disabled';
+            student.status = 'enabled';
             //student.image_path = req.file.filename
             // Generate student ID
             student.student_no = Math.floor(1000 + Math.random() * 9000);
 
             let newStudent = await studentRepository.create(student);
             // Create QR code and email to the student
-            console.log("id : ",newStudent.id)
             QRCode.toFile('images/QRcode.png', newStudent.id.toString(), {
                 color: {
                     dark: '#000',  // Black dots
@@ -42,6 +42,30 @@ class StudentController {
                 }
                 emailHelper.sendEmailWithAttachment(emaildata)
             })
+
+            // Create user account
+            let user = {};
+            user.username = student.first_name.toLowerCase()+Math.floor(100 + Math.random() * 100);
+            user.password = Math.floor(1000 + Math.random() * 9000);
+            user.user_type = 'student';
+            let newUser = await userRepository.create(user);
+
+            // Send user account details to the student
+            const emaildata = {
+                email: student.status,
+                subject: "User account created",
+                text: `
+                                <p>Hello ${student.first_name}</p>
+                                <p>New user account has been created.</p>
+                                <h5>details</h5>
+                                <p>User Name : ${newUser.username}</p>
+                                <p>Pwd : ${newUser.password}</p>
+                                <a href="http://localhost:3000/login">Login</a>
+                            `
+            }
+
+            await emailHelper.sendTextEmail(emaildata)
+
 
             res.status(200).send({
                 'success': true,
