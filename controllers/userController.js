@@ -14,6 +14,11 @@ class UserController {
                     'success': true,
                     'data': user
                 });
+            }else{
+                res.status(400).send({
+                    'success': false,
+                    'msg': 'Invalid User'
+                });
             }
 
         } catch (e) {
