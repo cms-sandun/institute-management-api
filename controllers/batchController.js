@@ -149,16 +149,13 @@ class BatchController {
 
     async deleteAssociateStudents(req, res) {
         try {
-            const batchId = req.query.batch_id
-            let registeredStudents = await batchRepository.findStudentsByBatchId(batchId)
-            var students = registeredStudents[0].dataValues.students
+            const id = req.query.id
+            let response = await studentRegRepository.delete(id)
 
-            if (students) {
-                res.status(200).send({
-                    'success': true,
-                    'data': students
-                });
-            }
+            res.status(200).send({
+                'success': true,
+                'msg': "Successfully deleted"
+            });
         } catch (e) {
             res.status(200).send({
                 'success': false,
