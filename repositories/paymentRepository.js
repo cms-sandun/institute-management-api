@@ -21,30 +21,6 @@ class PaymentRepository {
         return sequelize.query("SELECT * FROM `payment` where id="+id, { type: QueryTypes.SELECT });
     }
 
-    findByName(name) {
-        return studentModel.findAll({
-            where: {
-                [Op.or]: [
-                    {
-                        first_name: {
-                            [Op.like]: `%${name}%`
-                        }
-                    },
-                    {
-                        middle_name: {
-                            [Op.like]: `%${name}%`
-                        }
-                    },
-                    {
-                        last_name: {
-                            [Op.like]: `%${name}%`
-                        }
-                    },
-                ]
-            }
-        })
-    }
-
     findByBatchId(batchId){
         return studentModel.findAll({
             include: [

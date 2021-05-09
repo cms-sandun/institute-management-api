@@ -2,6 +2,7 @@ const studentModel = require("../models").student;
 const batchModel = require("../models").batch;
 const stuRegistrationModel = require("../models").stu_registration;
 const {Op} = require('sequelize')
+const {Sequelize} = require('sequelize')
 
 class StudentRepository {
 
@@ -19,6 +20,14 @@ class StudentRepository {
         return studentModel.findOne({
             where: {
                 id: id
+            }
+        })
+    }
+
+    findByEmail(email){
+        return studentModel.findOne({
+            where: {
+                email: email
             }
         })
     }

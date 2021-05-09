@@ -31,6 +31,16 @@ class EmployeeController {
             //     if (err) console.log(err)
             // })
 
+            // Check if already exist by email
+            // const existingStudent = await studentRepository.findByEmail(req.body.email)
+            // if(existingStudent){
+            //     res.status(200).send({
+            //         'success': false,
+            //         'msg': "Email already exists"
+            //     });
+            //     return
+            // }
+
             let newEmployee = await employeeRepository.create(employee);
 
             return responseHelper.sendSuccessfullyCreated(res, newEmployee);

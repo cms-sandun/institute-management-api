@@ -220,6 +220,7 @@ class ExamController {
             }
 
             var enrolledStudents = await examRepository.findStudentsByExamId(exam_id)
+            console.log("--------------------- enrolled students ",enrolledStudents)
             const exam = await examRepository.findById(exam_id)
             var students = enrolledStudents[0].dataValues.students
 
@@ -259,6 +260,7 @@ class ExamController {
 
 
             var enrolledStudents = await examRepository.findStudentsByExamId(exam_id)
+
             var students = enrolledStudents[0].dataValues.students
 
             res.status(200).send({

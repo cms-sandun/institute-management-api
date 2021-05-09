@@ -10,14 +10,6 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.TEXT,
             allowNull: false
         },
-        teacher_id: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                model: 'employee',
-                key: 'id'
-            }
-        },
         day: {
             type: DataTypes.ENUM('monday', 'tuesday','wednesday','thursday','friday','saturday','sunday'),
             allowNull: true

@@ -30,7 +30,7 @@ class StuAttendanceRepository {
             where: {
                 [Op.and]: [
                     {classes_id: class_id},
-                    sequelize.where(sequelize.fn('DATE', sequelize.col('stuAttendance.created_at')), date)
+                    sequelize.where(sequelize.fn('DATE', sequelize.col('stu_attendance.created_at')), date)
                 ]
             },
             include: [
