@@ -15,7 +15,7 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: false
         },
         user_type: {
-            type: DataTypes.ENUM('admin','teacher','student','parent'),
+            type: DataTypes.ENUM('admin','teacher','student','receptionist'),
             allowNull: false
         },
         updated_at: {
