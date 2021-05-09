@@ -16,11 +16,13 @@ class UserController {
                     'success': true,
                     'data': user
                 });
+                return
             } else {
-                res.status(400).send({
+                res.status(200).send({
                     'success': false,
                     'msg': 'Invalid User'
                 });
+                return
             }
 
         } catch (e) {
@@ -120,7 +122,7 @@ class UserController {
         try {
             let user = {};
             let userId = req.params.id;
-            user.username = req.body.name;
+            user.username = req.body.user_name;
             user.password = req.body.password;
             user.user_type = req.body.user_type;
 
